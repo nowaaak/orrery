@@ -46,7 +46,7 @@ public record LastPlayed(String kind, String target, String name) {
     }
 
     public boolean isAvailable(Minecraft minecraft) {
-        return !isWorld() || minecraft.getLevelSource().levelExists(target);
+        return isWorld() ? minecraft.getLevelSource().levelExists(target) : minecraft.allowsMultiplayer();
     }
 
     public void open(Minecraft minecraft, Screen parent) {
@@ -58,10 +58,12 @@ public record LastPlayed(String kind, String target, String name) {
             *///?}
             return;
         }
-        connect(minecraft, parent, name, target);
+        if (minecraft.allowsMultiplayer()) {
+            connect(minecraft, parent, name, target);
+        }
     }
 
-    public static void connect(Minecraft minecraft, Screen parent, String name, String address) {
+    private static void connect(Minecraft minecraft, Screen parent, String name, String address) {
         //? if >=1.21.11 {
         ServerData data = new ServerData(name, address, ServerData.Type.OTHER);
         ConnectScreen.startConnecting(parent, minecraft, ServerAddress.parseString(address), data, false, null);
