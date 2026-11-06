@@ -1,6 +1,5 @@
 package io.github.nowaaak.orrery.companion.modules;
 
-import io.github.nowaaak.orrery.companion.modules.game.AutoReconnectModule;
 import io.github.nowaaak.orrery.companion.modules.game.ChatModule;
 import io.github.nowaaak.orrery.companion.modules.game.CrosshairModule;
 import io.github.nowaaak.orrery.companion.modules.game.HandPositionModule;
@@ -26,7 +25,6 @@ public final class Modules {
     public static final HandPositionModule HAND_POSITION = new HandPositionModule();
     public static final ChatModule CHAT = new ChatModule();
     public static final WaypointsModule WAYPOINTS = new WaypointsModule();
-    public static final AutoReconnectModule AUTO_RECONNECT = new AutoReconnectModule();
 
     private static final List<Module> ALL = List.of(
             new FpsModule(),
@@ -43,8 +41,7 @@ public final class Modules {
             LOW_FIRE,
             HAND_POSITION,
             CHAT,
-            WAYPOINTS,
-            AUTO_RECONNECT);
+            WAYPOINTS);
     private static final List<HudModule> HUD = ALL.stream()
             .filter(HudModule.class::isInstance)
             .map(HudModule.class::cast)
@@ -64,6 +61,5 @@ public final class Modules {
     public static void tick(Minecraft minecraft) {
         ZOOM.tick(minecraft);
         WAYPOINTS.tick(minecraft);
-        AUTO_RECONNECT.tick(minecraft);
     }
 }

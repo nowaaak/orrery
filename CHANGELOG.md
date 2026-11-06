@@ -3,7 +3,8 @@
 ## 0.4.0
 
 - Cosmetics are removed: hats, wings, the own cape image and the cosmetics stored in skins. Orrery only offers the capes your Minecraft profile owns. Emotes stay
-- Freelook, fullbright and auto sprint are removed from the companion
+- Freelook, fullbright, auto sprint and auto reconnect are removed from the companion
+- The continue button for the last server in the companion's title screens is hidden when the account may not play multiplayer, for example because of parental controls or a multiplayer ban
 - The installer, the app bundle, the welcome screen and the release notes state that Orrery is independent and not an official Minecraft product
 - CurseForge as a second source in builds with a CurseForge API key: search and install mods, resource packs and shaders with their dependencies, install CurseForge modpacks from the modpack dialog, from a file or by dropping the zip, export an instance as a CurseForge zip, and get updates for CurseForge content
 - Modpack exports also contain the `scripts`, `resources` and `structures` folders, so packs with CraftTweaker scripts or custom resources stay complete

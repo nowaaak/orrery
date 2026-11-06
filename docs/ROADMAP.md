@@ -219,10 +219,10 @@ Every milestone keeps the existing rules: verified downloads, atomic writes, val
 - Zoom (smooth and scroll), crosshair editor
 - Camera tweaks: no view bobbing, no damage tilt, low fire, hand position
 - Chat: timestamps, stacking of repeated lines, copy, longer history
-- Waypoints, death point and auto reconnect
+- Waypoints and death point
 - Bridge features: Discord presence with server, world and dimension, live status in the launcher, playtime per server, screenshots in the launcher gallery right away, launcher notifications as in-game toasts
 
-**Stages:** 1 (done) module system, policy per module, HUD renderer and editor, FPS, coordinates, clock, memory, server and ping. 2 (done) keystrokes, CPS, durability, status effects. 3a (done) zoom. Freelook, fullbright and auto sprint were built and then removed, because they go beyond display and comfort. Toggle sprint and sneak, view bobbing and damage tilt are vanilla options. 3b (done) crosshair editor, low fire, hand position. 4a (done) chat timestamps, stacking, longer history, chat history with copy. 4b (done) waypoints, death point, auto reconnect. 5 (done) bridge features.
+**Stages:** 1 (done) module system, policy per module, HUD renderer and editor, FPS, coordinates, clock, memory, server and ping. 2 (done) keystrokes, CPS, durability, status effects. 3a (done) zoom. Freelook, fullbright and auto sprint were built and then removed, because they go beyond display and comfort. Toggle sprint and sneak, view bobbing and damage tilt are vanilla options. 3b (done) crosshair editor, low fire, hand position. 4a (done) chat timestamps, stacking, longer history, chat history with copy. 4b (done) waypoints, death point. Auto reconnect was built and then removed, because it rejoined after kicks too. 5 (done) bridge features.
 
 **Done when:** every module can be placed, saved and restored, the policy channel switches each module off, and FPS stays within measurement noise with all HUD modules on (fixed test scene).
 

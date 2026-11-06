@@ -97,7 +97,7 @@ These environment variables are read at compile time:
 Orrery Companion is Orrery's own client mod. The launcher loads it into Fabric and Quilt instances (1.20.1, 1.21.11 and 26.3) unless it is switched off in the instance settings. It never ends up in exported modpacks. It adds:
 
 - The Orrery title screen in place of the vanilla one, with the classic menu one click away. The Minecraft logo and Mojang's textures are not changed or shipped
-- The Orrery menu (right Shift) with display and comfort modules, all off by default: FPS, coordinates, clock, memory, server and ping, keystrokes, CPS, durability, status effects, zoom, crosshair editor, low fire, hand position, chat timestamps and history, waypoints and auto reconnect
+- The Orrery menu (right Shift) with display and comfort modules, all off by default: FPS, coordinates, clock, memory, server and ping, keystrokes, CPS, durability, status effects, zoom, crosshair editor, low fire, hand position, chat timestamps and history, and waypoints
 - Emotes that only you see
 - A local connection to the launcher for Discord Rich Presence, playtime per server, screenshots and task toasts
 

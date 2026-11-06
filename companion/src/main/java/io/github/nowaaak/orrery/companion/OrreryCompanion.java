@@ -29,7 +29,6 @@ public class OrreryCompanion implements ClientModInitializer {
         Policy.register();
         TitleScreenExtras.register();
         HudRenderer.register();
-        Modules.AUTO_RECONNECT.register();
         bridge = Bridge.fromSystemProperties(OrreryCompanion::onLauncherMessage);
         if (bridge != null) {
             bridge.start();

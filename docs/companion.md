@@ -92,9 +92,8 @@ Every feature of the mod is a module with an id. The Orrery menu lists them unde
 | `chat` | Timestamps, stacking of repeated messages (`×3`) and a longer history (up to 1000) |
 
 | `waypoints` | Waypoints per world or server and dimension, a compass bar with name and distance |
-| `auto_reconnect` | Countdown and reconnect on the disconnect screen, at most five tries in a row |
 
-Waypoints are set with B or in the waypoint screen behind the settings button of the module, and the death point replaces the previous one on every death. They live in `waypoints.json`, keyed by `world:<folder>` or `server:<address>`. Auto reconnect only knows the last server the player joined in this session, and the tries reset after a minute on the server.
+Waypoints are set with B or in the waypoint screen behind the settings button of the module, and the death point replaces the previous one on every death. They live in `waypoints.json`, keyed by `world:<folder>` or `server:<address>`.
 
 The chat history in the Orrery menu lists the stored messages. A click copies a message to the clipboard. Vanilla has no way to find the chat line under the mouse, so copying lives in this screen instead of the chat itself.
 
@@ -141,4 +140,5 @@ All files are written atomically. An unreadable file is ignored and logged.
 
 - Only display and comfort features. Nothing automates movement or combat, changes brightness or the camera beyond vanilla, or reveals hidden information.
 - Every module obeys `orrery:policy`.
+- The title screens follow the game's own safety checks. Multiplayer, Realms and the continue button for a server are only offered when `allowsMultiplayer` and `allowsRealms` allow it, so parental controls and multiplayer bans apply. Nothing reconnects to a server by itself.
 - The mod makes no network connections of its own apart from the local bridge.
