@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.4.0
 
 - Cosmetics are removed: hats, wings, the own cape image and the cosmetics stored in skins. Orrery only offers the capes your Minecraft profile owns. Emotes stay
 - Freelook, fullbright and auto sprint are removed from the companion
