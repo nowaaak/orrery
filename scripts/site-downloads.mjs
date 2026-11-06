@@ -85,6 +85,10 @@ async function main() {
     const response = await fetch(`https://api.github.com/repos/${repository}/releases/latest`, {
         headers,
     });
+    if (response.status === 404) {
+        console.log("downloads: no release yet, the site links to the releases page");
+        return;
+    }
     if (!response.ok) {
         throw new Error(`GitHub answered ${response.status} for the latest release`);
     }
