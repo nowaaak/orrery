@@ -8,157 +8,594 @@
             name="description"
             content="Orrery is an independent, free and open-source launcher for Minecraft: Java Edition on Windows, macOS and Linux. Not an official Minecraft product."
         />
+        <meta name="theme-color" content="#070914" />
         <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+        <link
+            rel="preload"
+            href="assets/fonts/geist.woff2"
+            as="font"
+            type="font/woff2"
+            crossorigin
+        />
         <link rel="stylesheet" href="style.css" />
         <script src="download.js" defer></script>
     </head>
     <body>
-        <header class="top wrap">
-            <a class="brand" href="./">
-                <img src="assets/logo.png" alt="" width="32" height="32" />
-                Orrery
-            </a>
-            <nav class="links" aria-label="Main">
-                <a href="#accounts">Accounts</a>
-                <a href="privacy.html">Privacy</a>
-                <a href="https://github.com/nowaaak/orrery">Source code</a>
-            </nav>
+        <a class="skip" href="#main">Skip to content</a>
+        <header class="site-header">
+            <div class="wrap">
+                <a class="brand" href="./">
+                    <img src="assets/logo.png" alt="" width="32" height="32" />
+                    Orrery
+                </a>
+                <nav class="nav" aria-label="Main">
+                    <a href="#features">Features</a>
+                    <a href="#companion">Companion</a>
+                    <a href="#accounts">Sign-in</a>
+                    <a href="#faq">FAQ</a>
+                    <a href="https://github.com/nowaaak/orrery">GitHub</a>
+                </nav>
+                <a class="button primary" href="#download">Download</a>
+            </div>
         </header>
 
-        <main class="wrap">
-            <section class="hero">
-                <h1>An independent, open-source launcher for Minecraft: Java Edition</h1>
-                <p class="lead">
-                    Orrery installs, manages and starts Minecraft: Java Edition on Windows, macOS
-                    and Linux. Every instance keeps its own version, mod loader, mods, worlds and
-                    settings.
-                </p>
-                <div class="actions">
-                    <a class="button primary" href="#download">Download</a>
-                    <a class="button" href="https://github.com/nowaaak/orrery">View on GitHub</a>
-                </div>
-                <p class="note">
-                    Free of charge, no ads, no telemetry. Installers for Windows, macOS (Apple
-                    Silicon and Intel) and Linux (AppImage, deb, rpm).
-                </p>
-                <img
-                    class="shot"
-                    src="assets/instances.png"
-                    width="1920"
-                    height="1200"
-                    alt="Orrery's instance overview with a continue playing card and three instances for Minecraft 1.20.1 with Fabric, 1.8.9 and 1.21.1 with Quilt"
-                />
-            </section>
+        <main id="main">
+            <div class="sky">
+                <section class="hero wrap">
+                    <svg class="orbits" viewBox="0 0 1000 1000" aria-hidden="true">
+                        <defs>
+                            <linearGradient id="ring-a" x1="0" y1="0" x2="1" y2="1">
+                                <stop offset="0" stop-color="#a5b4fc" />
+                                <stop offset="1" stop-color="#6366f1" stop-opacity="0.2" />
+                            </linearGradient>
+                            <linearGradient id="ring-b" x1="1" y1="0" x2="0" y2="1">
+                                <stop offset="0" stop-color="#67e8f9" />
+                                <stop offset="1" stop-color="#0891b2" stop-opacity="0.2" />
+                            </linearGradient>
+                        </defs>
+                        <g class="spin">
+                            <ellipse
+                                cx="500"
+                                cy="500"
+                                rx="470"
+                                ry="190"
+                                fill="none"
+                                stroke="url(#ring-a)"
+                                stroke-width="1.5"
+                                transform="rotate(-18 500 500)"
+                            />
+                            <circle cx="948" cy="352" r="9" fill="#818cf8" />
+                        </g>
+                        <g class="spin reverse">
+                            <ellipse
+                                cx="500"
+                                cy="500"
+                                rx="380"
+                                ry="140"
+                                fill="none"
+                                stroke="url(#ring-b)"
+                                stroke-width="1.5"
+                                transform="rotate(24 500 500)"
+                            />
+                            <circle cx="164" cy="350" r="7" fill="#22d3ee" />
+                        </g>
+                        <circle
+                            cx="500"
+                            cy="500"
+                            r="300"
+                            fill="none"
+                            stroke="#a5b4fc"
+                            stroke-opacity="0.08"
+                        />
+                    </svg>
 
-            <section aria-labelledby="download">
-                <h2 id="download">Download</h2>
-                <div id="download-files">
+                    <p class="eyebrow">
+                        <span class="dot">Free</span>
+                        Open source · No ads · No telemetry
+                    </p>
+                    <h1>Your instances. <span class="gradient">In perfect orbit.</span></h1>
+                    <p class="lead">
+                        Orrery is an independent, open-source launcher for Minecraft: Java Edition.
+                        It installs, manages and starts every version, with its own mods, worlds and
+                        settings per instance.
+                    </p>
+                    <div class="actions">
+                        <a class="button primary large" href="#download">
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                aria-hidden="true"
+                            >
+                                <path d="M12 3v12" />
+                                <path d="m7 10 5 5 5-5" />
+                                <path d="M5 21h14" />
+                            </svg>
+                            Download Orrery
+                        </a>
+                        <a class="button large" href="https://github.com/nowaaak/orrery">
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                aria-hidden="true"
+                            >
+                                <path d="m8 7-5 5 5 5" />
+                                <path d="m16 7 5 5-5 5" />
+                            </svg>
+                            View the source
+                        </a>
+                    </div>
+                    <p class="platforms">Windows · macOS (Apple Silicon and Intel) · Linux</p>
+
+                    <div class="window">
+                        <img
+                            src="assets/instances.png"
+                            width="1920"
+                            height="1200"
+                            alt="Orrery's instance overview with a continue playing card and three instances for Minecraft 1.20.1 with Fabric, 1.8.9 and 1.21.1 with Quilt"
+                        />
+                    </div>
+
+                    <div class="stats">
+                        <div class="stat">
+                            <strong>1.8+</strong>
+                            <span>Every release and snapshot</span>
+                        </div>
+                        <div class="stat">
+                            <strong>5</strong>
+                            <span>Mod loaders built in</span>
+                        </div>
+                        <div class="stat">
+                            <strong>3</strong>
+                            <span>Desktop platforms</span>
+                        </div>
+                        <div class="stat">
+                            <strong>0</strong>
+                            <span>Ads or trackers</span>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <section class="section wrap" aria-labelledby="features">
+                <div class="section-head">
+                    <p class="kicker">Features</p>
+                    <h2 id="features">Everything a launcher should do, nothing it should not.</h2>
                     <p>
-                        Get the installer for your system from the
-                        <a href="https://github.com/nowaaak/orrery/releases/latest"
-                            >latest release</a
-                        >.
+                        From the first install to the hundredth modpack, Orrery keeps each setup
+                        clean, checked and easy to get back to.
                     </p>
                 </div>
-            </section>
-
-            <section aria-labelledby="features">
-                <h2 id="features">What it does</h2>
-                <div class="grid">
-                    <div class="card">
-                        <h3>Every version from 1.8</h3>
+                <div class="bento">
+                    <div class="card wide">
+                        <span class="icon">
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                aria-hidden="true"
+                            >
+                                <rect x="3" y="3" width="7" height="7" rx="2" />
+                                <rect x="14" y="3" width="7" height="7" rx="2" />
+                                <rect x="3" y="14" width="7" height="7" rx="2" />
+                                <rect x="14" y="14" width="7" height="7" rx="2" />
+                            </svg>
+                        </span>
+                        <h3>Instances that stay separate</h3>
                         <p>
-                            Releases and snapshots straight from Mojang's version manifest. Every
-                            download is checked against its published hash.
+                            Each instance has its own version, mod loader, mods, memory and window
+                            settings. Bring your existing setups along: Orrery imports from Prism
+                            Launcher, MultiMC, Modrinth App, CurseForge, ATLauncher, GDLauncher and
+                            the official launcher.
                         </p>
                     </div>
                     <div class="card">
-                        <h3>Java included</h3>
-                        <p>
-                            Orrery picks the Java runtime Mojang publishes for each version, with
-                            Eclipse Adoptium as a fallback.
-                        </p>
-                    </div>
-                    <div class="card">
+                        <span class="icon cyan">
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                aria-hidden="true"
+                            >
+                                <path d="M12 2 3 7l9 5 9-5-9-5Z" />
+                                <path d="m3 12 9 5 9-5" />
+                                <path d="m3 17 9 5 9-5" />
+                            </svg>
+                        </span>
                         <h3>Mods and modpacks</h3>
                         <p>
-                            Fabric, Legacy Fabric, Quilt, Forge and NeoForge, plus mods, resource
-                            packs, shaders and modpacks from Modrinth and CurseForge with their
-                            dependencies.
+                            Fabric, Legacy Fabric, Quilt, Forge and NeoForge. Mods, resource packs,
+                            shaders and modpacks from Modrinth and CurseForge, with dependencies and
+                            updates.
                         </p>
                     </div>
                     <div class="card">
-                        <h3>Worlds and servers</h3>
+                        <span class="icon gold">
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                aria-hidden="true"
+                            >
+                                <path d="M17 8h1a4 4 0 0 1 0 8h-1" />
+                                <path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z" />
+                                <path d="M6 2v3M10 2v3M14 2v3" />
+                            </svg>
+                        </span>
+                        <h3>Java included</h3>
                         <p>
-                            World backups and restore, Quick Play into a world, the in-game server
-                            list with ping and player count.
+                            The right Java runtime for every version, set up automatically. Mojang's
+                            runtimes first, Eclipse Adoptium as a fallback.
                         </p>
                     </div>
                     <div class="card">
+                        <span class="icon">
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                aria-hidden="true"
+                            >
+                                <circle cx="12" cy="12" r="9" />
+                                <path d="M3 12h18" />
+                                <path d="M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18" />
+                            </svg>
+                        </span>
+                        <h3>Worlds and backups</h3>
+                        <p>
+                            Back up and restore worlds, jump straight into one with Quick Play, and
+                            undo a deletion from the trash.
+                        </p>
+                    </div>
+                    <div class="card">
+                        <span class="icon cyan">
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                aria-hidden="true"
+                            >
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+                            </svg>
+                        </span>
                         <h3>Help when the game crashes</h3>
                         <p>
                             A live game log, crash detection with the likely cause and a memory
-                            recommendation per instance.
+                            recommendation for every instance.
                         </p>
                     </div>
                     <div class="card">
-                        <h3>Orrery Companion</h3>
+                        <span class="icon gold">
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                aria-hidden="true"
+                            >
+                                <path d="M13 2 3 14h9l-1 8 10-12h-9l1-8Z" />
+                            </svg>
+                        </span>
+                        <h3>Fast by default</h3>
                         <p>
-                            An optional client mod for Fabric and Quilt, switchable per instance:
-                            the Orrery title screen, display modules such as FPS, coordinates and
-                            keystrokes, zoom, waypoints and emotes that only you see. No cosmetics,
-                            no capes, nothing that automates play or reveals hidden information.
+                            A one-click performance pack, game options tuned to your hardware and a
+                            dedicated GPU preference on Windows.
                         </p>
                     </div>
                     <div class="card">
-                        <h3>Open source</h3>
+                        <span class="icon">
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                aria-hidden="true"
+                            >
+                                <path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6l-8-3Z" />
+                                <path d="m9 12 2 2 4-4" />
+                            </svg>
+                        </span>
+                        <h3>Checked downloads</h3>
                         <p>
-                            Written in Rust and TypeScript with Tauri 2. The full source code is on
-                            GitHub under the GPL-3.0 license.
+                            Every file is verified against its published hash and written
+                            atomically. Launcher updates are signed.
+                        </p>
+                    </div>
+                    <div class="card">
+                        <span class="icon cyan">
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                aria-hidden="true"
+                            >
+                                <path d="m8 7-5 5 5 5" />
+                                <path d="m16 7 5 5-5 5" />
+                                <path d="m14 4-4 16" />
+                            </svg>
+                        </span>
+                        <h3>Open source, all of it</h3>
+                        <p>
+                            Written in Rust and TypeScript with Tauri 2. The launcher, the companion
+                            mod, the shader pack and the menu pack are on GitHub under the GPL-3.0
+                            license. Read the code, file an issue or build it yourself.
                         </p>
                     </div>
                 </div>
             </section>
 
-            <section aria-labelledby="accounts" class="prose">
-                <h2 id="accounts">Accounts and sign-in</h2>
-                <p>
-                    Playing requires a Microsoft account that owns Minecraft: Java Edition. Orrery
-                    does not sell, unlock or bypass the game.
-                </p>
-                <ul>
-                    <li>
-                        Sign-in uses Microsoft's own device code flow. You enter a code on
-                        <code>microsoft.com/link</code> in your browser. Orrery never sees your
-                        password or verification codes.
-                    </li>
-                    <li>
-                        Orrery requests only the <code>XboxLive.signin</code> and
-                        <code>offline_access</code> scopes, which Minecraft: Java Edition needs to
-                        start the game. The Microsoft refresh token is stored in the system keychain
-                        of your computer, the Minecraft access token only in memory.
-                    </li>
-                    <li>
-                        Account data is only sent to Microsoft, Xbox Live and Minecraft services.
-                        Orrery has no server of its own.
-                    </li>
-                    <li>
-                        Every game start, in singleplayer and on any server, signs in again online
-                        and checks with Mojang that the account owns Minecraft: Java Edition. The
-                        player name and UUID come from that verified profile. Without internet or
-                        when the check fails, the game does not start.
-                    </li>
-                    <li>
-                        Orrery has no offline accounts, no username-only profiles, no demo mode and
-                        no alternative authentication services. No development or testing switch
-                        skips the sign-in.
-                    </li>
-                    <li>
-                        Capes: Orrery only lets you choose between the capes your Minecraft profile
-                        owns. It offers no other capes.
-                    </li>
-                </ul>
-                <div class="card status">
+            <section class="section wrap" aria-labelledby="companion">
+                <div class="split">
+                    <div>
+                        <div class="section-head">
+                            <p class="kicker">Orrery Companion</p>
+                            <h2 id="companion">An optional mod for a calmer game.</h2>
+                            <p>
+                                For Fabric and Quilt on 1.20.1, 1.21.11 and 26.3. It adds the Orrery
+                                title screen, display modules and emotes that only you see. Switch
+                                it off per instance whenever you like.
+                            </p>
+                        </div>
+                        <ul class="chips" aria-label="Companion modules">
+                            <li>FPS</li>
+                            <li>Coordinates</li>
+                            <li>Clock</li>
+                            <li>Keystrokes</li>
+                            <li>CPS</li>
+                            <li>Durability</li>
+                            <li>Status effects</li>
+                            <li>Zoom</li>
+                            <li>Crosshair editor</li>
+                            <li>Chat timestamps</li>
+                            <li>Waypoints</li>
+                            <li>Emotes</li>
+                        </ul>
+                    </div>
+                    <div class="panel">
+                        <ul class="checks">
+                            <li>
+                                <span class="check"
+                                    ><svg
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2.5"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        aria-hidden="true"
+                                    >
+                                        <path d="m5 12 5 5L20 7" /></svg
+                                ></span>
+                                <span
+                                    ><strong>Off until you switch it on</strong>Every module starts
+                                    disabled.</span
+                                >
+                            </li>
+                            <li>
+                                <span class="check"
+                                    ><svg
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2.5"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        aria-hidden="true"
+                                    >
+                                        <path d="m5 12 5 5L20 7" /></svg
+                                ></span>
+                                <span
+                                    ><strong>Servers stay in charge</strong>Any server can switch
+                                    modules off through the
+                                    <code>orrery:policy</code> channel.</span
+                                >
+                            </li>
+                            <li>
+                                <span class="check"
+                                    ><svg
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2.5"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        aria-hidden="true"
+                                    >
+                                        <path d="m5 12 5 5L20 7" /></svg
+                                ></span>
+                                <span
+                                    ><strong>No unfair advantages</strong>Nothing automates movement
+                                    or combat, changes brightness or reveals hidden
+                                    information.</span
+                                >
+                            </li>
+                            <li>
+                                <span class="check"
+                                    ><svg
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2.5"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        aria-hidden="true"
+                                    >
+                                        <path d="m5 12 5 5L20 7" /></svg
+                                ></span>
+                                <span
+                                    ><strong>No cosmetics, no capes</strong>The only capes in your
+                                    game are the official ones your profile owns.</span
+                                >
+                            </li>
+                            <li>
+                                <span class="check"
+                                    ><svg
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2.5"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        aria-hidden="true"
+                                    >
+                                        <path d="m5 12 5 5L20 7" /></svg
+                                ></span>
+                                <span
+                                    ><strong>Safety settings respected</strong>Parental controls and
+                                    multiplayer restrictions apply as in the vanilla game.</span
+                                >
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section wrap" aria-labelledby="accounts">
+                <div class="section-head center">
+                    <p class="kicker">Sign-in</p>
+                    <h2 id="accounts">Your account, handled the official way.</h2>
+                    <p>
+                        Playing requires a Microsoft account that owns Minecraft: Java Edition.
+                        Orrery does not sell, unlock or bypass the game.
+                    </p>
+                </div>
+                <div class="trust">
+                    <div class="card">
+                        <span class="icon">
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                aria-hidden="true"
+                            >
+                                <rect x="4" y="11" width="16" height="10" rx="2" />
+                                <path d="M8 11V7a4 4 0 0 1 8 0v4" />
+                            </svg>
+                        </span>
+                        <h3>Microsoft's own sign-in page</h3>
+                        <p>
+                            Orrery uses Microsoft's device code flow. You enter a short code on
+                            <code>microsoft.com/link</code> in your browser. Orrery never sees your
+                            password or verification codes.
+                        </p>
+                    </div>
+                    <div class="card">
+                        <span class="icon cyan">
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                aria-hidden="true"
+                            >
+                                <path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6l-8-3Z" />
+                                <path d="m9 12 2 2 4-4" />
+                            </svg>
+                        </span>
+                        <h3>Ownership checked on every start</h3>
+                        <p>
+                            Every game start, in singleplayer and on any server, signs in again
+                            online and checks with Mojang that the account owns the game. The player
+                            name and UUID come from that verified profile. Without internet or when
+                            the check fails, the game does not start.
+                        </p>
+                    </div>
+                    <div class="card">
+                        <span class="icon gold">
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                aria-hidden="true"
+                            >
+                                <circle cx="8" cy="15" r="4" />
+                                <path d="m10.8 12.2 9.2-9.2" />
+                                <path d="m17 6 3 3" />
+                                <path d="m14 9 2 2" />
+                            </svg>
+                        </span>
+                        <h3>Tokens stay on your computer</h3>
+                        <p>
+                            Only the <code>XboxLive.signin</code> and <code>offline_access</code>
+                            scopes are requested. The refresh token lives in your system keychain,
+                            the Minecraft access token only in memory. Account data goes to
+                            Microsoft, Xbox Live and Minecraft services, never to a server of ours.
+                        </p>
+                    </div>
+                    <div class="card">
+                        <span class="icon">
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                aria-hidden="true"
+                            >
+                                <circle cx="12" cy="12" r="9" />
+                                <path d="m5.6 5.6 12.8 12.8" />
+                            </svg>
+                        </span>
+                        <h3>No shortcuts</h3>
+                        <p>
+                            No offline accounts, no username-only profiles, no demo mode and no
+                            alternative authentication services. No development or testing switch
+                            skips the sign-in. Capes come only from your own Minecraft profile.
+                        </p>
+                    </div>
+                </div>
+                <div class="callout" role="note">
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                    >
+                        <circle cx="12" cy="12" r="9" />
+                        <path d="M12 8v5" />
+                        <path d="M12 16h.01" />
+                    </svg>
                     <p>
                         Status: Mojang has not yet approved Orrery's Microsoft app registration for
                         Minecraft services. Until then, signing in stops after the Microsoft step
@@ -166,20 +603,138 @@
                     </p>
                 </div>
             </section>
+
+            <section class="section wrap" aria-labelledby="faq">
+                <div class="section-head center">
+                    <p class="kicker">FAQ</p>
+                    <h2 id="faq">Questions, answered.</h2>
+                </div>
+                <div class="faq">
+                    <details>
+                        <summary>Is Orrery free?</summary>
+                        <p>
+                            Yes. Orrery is free of charge, has no ads and no paid features, and its
+                            source code is public under the GPL-3.0 license.
+                        </p>
+                    </details>
+                    <details>
+                        <summary>Do I need to own Minecraft?</summary>
+                        <p>
+                            Yes. You sign in with the Microsoft account you bought Minecraft: Java
+                            Edition with. Orrery checks with Mojang that the account owns the game
+                            before every start.
+                        </p>
+                    </details>
+                    <details>
+                        <summary>Can I play without internet?</summary>
+                        <p>
+                            No. Every game start signs in online and verifies ownership. Without
+                            internet you can still open Orrery and look at your instances.
+                        </p>
+                    </details>
+                    <details>
+                        <summary>Is Orrery an official Minecraft product?</summary>
+                        <p>
+                            No. Orrery is an independent project. It is not approved by or
+                            associated with Mojang or Microsoft.
+                        </p>
+                    </details>
+                    <details>
+                        <summary>Does Orrery offer capes or cosmetics?</summary>
+                        <p>
+                            No. You can choose between the official capes your Minecraft profile
+                            owns. Orrery adds no capes and no cosmetics of its own.
+                        </p>
+                    </details>
+                    <details>
+                        <summary>What does Orrery do with my data?</summary>
+                        <p>
+                            Nothing leaves your computer except the requests needed to sign in,
+                            download game files and install content. The
+                            <a href="privacy.html">privacy page</a> lists every service and what it
+                            receives.
+                        </p>
+                    </details>
+                    <details>
+                        <summary>Which systems are supported?</summary>
+                        <p>
+                            Windows 10 and 11, macOS on Apple Silicon and Intel, and Linux as
+                            AppImage, deb and rpm. The AppImage updates itself.
+                        </p>
+                    </details>
+                </div>
+            </section>
+
+            <section class="section wrap" aria-labelledby="download">
+                <div class="cta">
+                    <div class="section-head center">
+                        <p class="kicker">Download</p>
+                        <h2 id="download">Ready in a minute.</h2>
+                        <p>Pick your system, sign in with Microsoft and start playing.</p>
+                    </div>
+                    <div id="download-files">
+                        <div class="download-fallback">
+                            <a
+                                class="button primary large"
+                                href="https://github.com/nowaaak/orrery/releases/latest"
+                                >Get the latest release</a
+                            >
+                            <p>Installers for Windows, macOS and Linux on GitHub.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </main>
 
-        <footer class="wrap">
-            <p>
-                NOT AN OFFICIAL MINECRAFT PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH MOJANG OR
-                MICROSOFT. Minecraft is a trademark of Mojang Synergies AB.
-            </p>
-            <p>
-                <a href="privacy.html">Privacy</a> · <a href="code-signing.html">Code signing</a> ·
-                <a href="mailto:nxwaaak@gmail.com">Contact</a> ·
-                <a href="https://github.com/nowaaak/orrery/issues">Issues</a> ·
-                <a href="https://github.com/nowaaak/orrery">Source code</a> ·
-                <a href="https://github.com/nowaaak/orrery/blob/main/LICENSE">License: GPL-3.0</a>
-            </p>
+        <footer class="site-footer">
+            <div class="wrap">
+                <div class="footer-grid">
+                    <div class="footer-about">
+                        <a class="brand" href="./">
+                            <img src="assets/logo.png" alt="" width="32" height="32" />
+                            Orrery
+                        </a>
+                        <p>An independent, open-source launcher for Minecraft: Java Edition.</p>
+                    </div>
+                    <div>
+                        <h2>Launcher</h2>
+                        <ul>
+                            <li><a href="./#download">Download</a></li>
+                            <li><a href="./#features">Features</a></li>
+                            <li><a href="./#faq">FAQ</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h2>Project</h2>
+                        <ul>
+                            <li><a href="https://github.com/nowaaak/orrery">Source code</a></li>
+                            <li><a href="https://github.com/nowaaak/orrery/issues">Issues</a></li>
+                            <li>
+                                <a href="https://github.com/nowaaak/orrery/blob/main/CHANGELOG.md"
+                                    >Changelog</a
+                                >
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h2>Legal</h2>
+                        <ul>
+                            <li><a href="privacy.html">Privacy</a></li>
+                            <li><a href="code-signing.html">Code signing</a></li>
+                            <li>
+                                <a href="https://github.com/nowaaak/orrery/blob/main/LICENSE"
+                                    >License: GPL-3.0</a
+                                >
+                            </li>
+                            <li><a href="mailto:nxwaaak@gmail.com">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <p class="disclaimer">
+                    NOT AN OFFICIAL MINECRAFT PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH MOJANG OR
+                    MICROSOFT. Minecraft is a trademark of Mojang Synergies AB.
+                </p>
+            </div>
         </footer>
     </body>
 </html>

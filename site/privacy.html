@@ -9,24 +9,38 @@
             content="What data the Orrery launcher stores and sends, and where."
         />
         <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+        <meta name="theme-color" content="#070914" />
+        <link
+            rel="preload"
+            href="assets/fonts/geist.woff2"
+            as="font"
+            type="font/woff2"
+            crossorigin
+        />
         <link rel="stylesheet" href="style.css" />
     </head>
     <body>
-        <header class="top wrap">
-            <a class="brand" href="./">
-                <img src="assets/logo.png" alt="" width="32" height="32" />
-                Orrery
-            </a>
-            <nav class="links" aria-label="Main">
-                <a href="./#accounts">Accounts</a>
-                <a href="privacy.html" aria-current="page">Privacy</a>
-                <a href="https://github.com/nowaaak/orrery">Source code</a>
-            </nav>
+        <a class="skip" href="#main">Skip to content</a>
+        <header class="site-header">
+            <div class="wrap">
+                <a class="brand" href="./">
+                    <img src="assets/logo.png" alt="" width="32" height="32" />
+                    Orrery
+                </a>
+                <nav class="nav" aria-label="Main">
+                    <a href="./#features">Features</a>
+                    <a href="./#companion">Companion</a>
+                    <a href="./#accounts">Sign-in</a>
+                    <a href="privacy.html" aria-current="page">Privacy</a>
+                    <a href="https://github.com/nowaaak/orrery">GitHub</a>
+                </nav>
+                <a class="button primary" href="./#download">Download</a>
+            </div>
         </header>
 
-        <main class="wrap prose">
+        <main id="main" class="wrap page">
             <h1>Privacy</h1>
-            <p class="note">Last updated: 5 November 2026</p>
+            <p class="updated">Last updated: 6 November 2026</p>
 
             <p>
                 Orrery is a desktop application that runs on your computer. It has no server, no
@@ -184,18 +198,55 @@
             </p>
         </main>
 
-        <footer class="wrap">
-            <p>
-                NOT AN OFFICIAL MINECRAFT PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH MOJANG OR
-                MICROSOFT. Minecraft is a trademark of Mojang Synergies AB.
-            </p>
-            <p>
-                <a href="./">Home</a> · <a href="code-signing.html">Code signing</a> ·
-                <a href="mailto:nxwaaak@gmail.com">Contact</a> ·
-                <a href="https://github.com/nowaaak/orrery/issues">Issues</a> ·
-                <a href="https://github.com/nowaaak/orrery">Source code</a> ·
-                <a href="https://github.com/nowaaak/orrery/blob/main/LICENSE">License: GPL-3.0</a>
-            </p>
+        <footer class="site-footer">
+            <div class="wrap">
+                <div class="footer-grid">
+                    <div class="footer-about">
+                        <a class="brand" href="./">
+                            <img src="assets/logo.png" alt="" width="32" height="32" />
+                            Orrery
+                        </a>
+                        <p>An independent, open-source launcher for Minecraft: Java Edition.</p>
+                    </div>
+                    <div>
+                        <h2>Launcher</h2>
+                        <ul>
+                            <li><a href="./#download">Download</a></li>
+                            <li><a href="./#features">Features</a></li>
+                            <li><a href="./#faq">FAQ</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h2>Project</h2>
+                        <ul>
+                            <li><a href="https://github.com/nowaaak/orrery">Source code</a></li>
+                            <li><a href="https://github.com/nowaaak/orrery/issues">Issues</a></li>
+                            <li>
+                                <a href="https://github.com/nowaaak/orrery/blob/main/CHANGELOG.md"
+                                    >Changelog</a
+                                >
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h2>Legal</h2>
+                        <ul>
+                            <li><a href="privacy.html">Privacy</a></li>
+                            <li><a href="code-signing.html">Code signing</a></li>
+                            <li>
+                                <a href="https://github.com/nowaaak/orrery/blob/main/LICENSE"
+                                    >License: GPL-3.0</a
+                                >
+                            </li>
+                            <li><a href="mailto:nxwaaak@gmail.com">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <p class="disclaimer">
+                    NOT AN OFFICIAL MINECRAFT PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH MOJANG OR
+                    MICROSOFT. Minecraft is a trademark of Mojang Synergies AB.
+                </p>
+            </div>
         </footer>
     </body>
 </html>
