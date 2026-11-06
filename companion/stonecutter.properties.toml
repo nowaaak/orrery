@@ -1,0 +1,20 @@
+mod.id = "orrery-companion"
+mod.name = "Orrery Companion"
+mod.version = "0.1.0"
+
+deps.fabric_loader = "0.20.1"
+
+["1.20.1"]
+mod.mc_compat = "1.20.1"
+deps.fabric_api = "0.92.12+1.20.1"
+deps.fabric_api_modules = "fabric-api-base,fabric-lifecycle-events-v1,fabric-key-binding-api-v1,fabric-networking-api-v1,fabric-screen-api-v1,fabric-resource-loader-v0,fabric-rendering-v1"
+
+["1.21.11"]
+mod.mc_compat = "1.21.11"
+deps.fabric_api = "0.141.6+1.21.11"
+deps.fabric_api_modules = "fabric-api-base,fabric-lifecycle-events-v1,fabric-key-binding-api-v1,fabric-networking-api-v1,fabric-screen-api-v1,fabric-resource-loader-v1,fabric-rendering-v1"
+
+["26.3"]
+mod.mc_compat = "~26.3"
+deps.fabric_api = "0.165.0+26.3"
+deps.fabric_api_modules = "fabric-api-base,fabric-lifecycle-events-v1,fabric-key-mapping-api-v1,fabric-networking-api-v1,fabric-screen-api-v1,fabric-resource-loader-v1,fabric-rendering-v1"

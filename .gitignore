@@ -1,0 +1,12 @@
+/target
+node_modules
+/dist
+/src-tauri/gen/schemas
+*.log
+.env*
+*.key
+.DS_Store
+src-tauri/resources/companion/*.jar
+src-tauri/resources/companion/companion.json
+/public/licenses.json
+/site/downloads.json

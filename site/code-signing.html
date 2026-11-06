@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+        <title>Code signing policy · Orrery Launcher</title>
+        <meta
+            name="description"
+            content="How Orrery's Windows releases are built and signed, and who approves them."
+        />
+        <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <header class="top wrap">
+            <a class="brand" href="./">
+                <img src="assets/logo.png" alt="" width="32" height="32" />
+                Orrery
+            </a>
+            <nav class="links" aria-label="Main">
+                <a href="./#download">Download</a>
+                <a href="privacy.html">Privacy</a>
+                <a href="https://github.com/nowaaak/orrery">Source code</a>
+            </nav>
+        </header>
+
+        <main class="wrap prose">
+            <h1>Code signing policy</h1>
+
+            <div class="card status">
+                <p>
+                    Status: Orrery applies for free code signing for open-source projects through
+                    the SignPath Foundation. Until the application is accepted, the Windows
+                    installers are not signed, and Windows SmartScreen may warn before the first
+                    start.
+                </p>
+            </div>
+
+            <h2>What gets signed</h2>
+            <p>
+                Only the Windows files of official releases: the launcher executable
+                <code>orrery.exe</code>, the setup program and the MSI package. They are built by
+                the public
+                <a href="https://github.com/nowaaak/orrery/actions/workflows/release.yml"
+                    >release workflow</a
+                >
+                on GitHub-hosted runners from a tagged commit of the
+                <a href="https://github.com/nowaaak/orrery">public repository</a>. Nothing is built
+                or signed on a private machine. Every file carries the product name Orrery and its
+                version in its metadata.
+            </p>
+            <p>
+                Updates are additionally signed with Orrery's own updater key. The launcher only
+                installs an update whose updater signature matches.
+            </p>
+
+            <h2>Team roles</h2>
+            <ul>
+                <li>
+                    Committers and reviewers: the members of the
+                    <a href="https://github.com/nowaaak/orrery">nowaaak/orrery</a> repository
+                </li>
+                <li>
+                    Approvers: the repository owner,
+                    <a href="https://github.com/nowaaak">nowaaak</a>
+                </li>
+            </ul>
+            <p>
+                Every release is approved by hand before it is signed. All accounts with access use
+                multi-factor authentication.
+            </p>
+
+            <h2>Privacy</h2>
+            <p>
+                Orrery only contacts the services it needs to install and start Minecraft, such as
+                Mojang, Microsoft, Modrinth and the mod loader repositories. It has no server of its
+                own, no telemetry and no ads. The
+                <a href="privacy.html">privacy page</a> lists every service and what it receives.
+            </p>
+
+            <h2>Reporting a problem</h2>
+            <p>
+                If you think a signed file is malicious or was not built from this repository,
+                please open an
+                <a href="https://github.com/nowaaak/orrery/issues">issue</a>.
+            </p>
+        </main>
+
+        <footer class="wrap">
+            <p>
+                NOT AN OFFICIAL MINECRAFT PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH MOJANG OR
+                MICROSOFT. Minecraft is a trademark of Mojang Synergies AB.
+            </p>
+            <p>
+                <a href="privacy.html">Privacy</a> · <a href="code-signing.html">Code signing</a> ·
+                <a href="https://github.com/nowaaak/orrery/issues">Contact and issues</a> ·
+                <a href="https://github.com/nowaaak/orrery">Source code</a> ·
+                <a href="https://github.com/nowaaak/orrery/blob/main/LICENSE">License: GPL-3.0</a>
+            </p>
+        </footer>
+    </body>
+</html>

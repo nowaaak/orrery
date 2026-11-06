@@ -1,0 +1,25 @@
+{
+    "$schema": "https://schema.tauri.app/config/2",
+    "productName": "Orrery Dev",
+    "identifier": "io.github.nowaaak.orrery.dev",
+    "app": {
+        "windows": [
+            {
+                "label": "main",
+                "title": "Orrery Dev",
+                "width": 1200,
+                "height": 760,
+                "minWidth": 900,
+                "minHeight": 600,
+                "decorations": false
+            }
+        ]
+    },
+    "plugins": {
+        "deep-link": {
+            "desktop": {
+                "schemes": ["orrery-dev"]
+            }
+        }
+    }
+}

@@ -1,0 +1,70 @@
+{
+    "packs": [
+        {
+            "id": "performance",
+            "mods": [
+                { "slug": "sodium", "name": "Sodium" },
+                { "slug": "lithium", "name": "Lithium" },
+                { "slug": "ferrite-core", "name": "FerriteCore" },
+                { "slug": "entityculling", "name": "Entity Culling" },
+                { "slug": "immediatelyfast", "name": "ImmediatelyFast" },
+                { "slug": "dynamic-fps", "name": "Dynamic FPS" }
+            ]
+        },
+        {
+            "id": "optifine",
+            "mods": [
+                { "slug": "sodium", "name": "Sodium" },
+                { "slug": "iris", "name": "Iris Shaders" },
+                { "slug": "continuity", "name": "Continuity", "features": ["connected_textures"] },
+                {
+                    "slug": "entity-model-features",
+                    "name": "Entity Model Features",
+                    "features": ["entity_models"]
+                },
+                {
+                    "slug": "entitytexturefeatures",
+                    "name": "Entity Texture Features",
+                    "features": ["random_entities", "emissive"]
+                },
+                { "slug": "cit-resewn", "name": "CIT Resewn", "features": ["item_textures"] },
+                { "slug": "nuit", "name": "Nuit", "features": ["sky"] },
+                { "slug": "nuit-interop", "name": "Nuit Interop", "features": ["sky"] },
+                { "slug": "animatica", "name": "Animatica", "features": ["animations"] },
+                { "slug": "zoomify", "name": "Zoomify" },
+                { "slug": "lambdynamiclights", "name": "LambDynamicLights" }
+            ]
+        },
+        {
+            "id": "shader_ready",
+            "mods": [
+                { "slug": "sodium", "name": "Sodium" },
+                { "slug": "iris", "name": "Iris Shaders" }
+            ]
+        },
+        {
+            "id": "low_end",
+            "mods": [
+                { "slug": "sodium", "name": "Sodium" },
+                { "slug": "lithium", "name": "Lithium" },
+                { "slug": "ferrite-core", "name": "FerriteCore" },
+                { "slug": "modernfix", "name": "ModernFix" },
+                { "slug": "entityculling", "name": "Entity Culling" },
+                { "slug": "moreculling", "name": "More Culling" },
+                { "slug": "immediatelyfast", "name": "ImmediatelyFast" },
+                { "slug": "badoptimizations", "name": "BadOptimizations" },
+                { "slug": "dynamic-fps", "name": "Dynamic FPS" }
+            ]
+        },
+        {
+            "id": "quality_of_life",
+            "mods": [
+                { "slug": "modmenu", "name": "Mod Menu" },
+                { "slug": "appleskin", "name": "AppleSkin" },
+                { "slug": "jade", "name": "Jade" },
+                { "slug": "mouse-tweaks", "name": "Mouse Tweaks" },
+                { "slug": "shulkerboxtooltip", "name": "Shulker Box Tooltip" }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,71 @@
+{
+    "$schema": "https://schema.tauri.app/config/2",
+    "productName": "Orrery",
+    "version": "../package.json",
+    "identifier": "io.github.nowaaak.orrery",
+    "build": {
+        "beforeDevCommand": "npm run dev",
+        "devUrl": "http://localhost:1420",
+        "beforeBuildCommand": "npm run licenses && npm run build",
+        "frontendDist": "../dist"
+    },
+    "app": {
+        "windows": [
+            {
+                "label": "main",
+                "title": "Orrery",
+                "width": 1200,
+                "height": 760,
+                "minWidth": 900,
+                "minHeight": 600,
+                "decorations": false
+            }
+        ],
+        "security": {
+            "csp": "default-src 'self'; img-src 'self' data: blob: https://cdn.modrinth.com https://textures.minecraft.net; style-src 'self' 'unsafe-inline'; connect-src 'self' ipc: http://ipc.localhost"
+        }
+    },
+    "bundle": {
+        "active": true,
+        "publisher": "nowaaak",
+        "copyright": "Copyright nowaaak. Not an official Minecraft product. Not approved by or associated with Mojang or Microsoft.",
+        "shortDescription": "Independent launcher for Minecraft: Java Edition",
+        "longDescription": "Orrery is an independent, open-source launcher for Minecraft: Java Edition. Not an official Minecraft product. Not approved by or associated with Mojang or Microsoft. Playing requires a Microsoft account that owns Minecraft: Java Edition.",
+        "targets": "all",
+        "icon": [
+            "icons/32x32.png",
+            "icons/128x128.png",
+            "icons/128x128@2x.png",
+            "icons/icon.icns",
+            "icons/icon.ico"
+        ],
+        "createUpdaterArtifacts": true,
+        "windows": {
+            "nsis": {
+                "installerIcon": "icons/icon.ico",
+                "uninstallerIcon": "icons/icon.ico",
+                "sidebarImage": "icons/installer/sidebar.bmp",
+                "headerImage": "icons/installer/header.bmp",
+                "languages": ["English", "German"],
+                "displayLanguageSelector": false
+            }
+        },
+        "resources": {
+            "resources/companion/": "resources/companion/"
+        }
+    },
+    "plugins": {
+        "updater": {
+            "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDM0RjU5NzA5NDM3QUY0OUYKUldTZjlIcERDWmYxTlB3NGtYY2xvRDg0amdRWUIzSjNHSnA3Y1BIcFZVa3lBVjJLT1JSL2M2ZW8K",
+            "requireSignedVersion": true,
+            "windows": {
+                "installMode": "passive"
+            }
+        },
+        "deep-link": {
+            "desktop": {
+                "schemes": ["orrery"]
+            }
+        }
+    }
+}

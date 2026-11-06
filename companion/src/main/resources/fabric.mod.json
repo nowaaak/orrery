@@ -1,0 +1,25 @@
+{
+    "schemaVersion": 1,
+    "id": "${id}",
+    "version": "${version}",
+    "name": "${name}",
+    "description": "Companion mod of the independent Orrery launcher: talks to the launcher and adds the Orrery menu. Not an official Minecraft product. Not approved by or associated with Mojang or Microsoft.",
+    "authors": ["nowaaak"],
+    "license": "GPL-3.0-only",
+    "contact": {
+        "email": "nxwaaak@gmail.com",
+        "homepage": "https://nowaaak.github.io/orrery/",
+        "sources": "https://github.com/nowaaak/orrery",
+        "issues": "https://github.com/nowaaak/orrery/issues"
+    },
+    "environment": "client",
+    "entrypoints": {
+        "client": ["io.github.nowaaak.orrery.companion.OrreryCompanion"]
+    },
+    "mixins": ["orrery-companion.mixins.json"],
+    "depends": {
+        "fabricloader": ">=0.14.21",
+        "minecraft": "${minecraft}",
+        "fabric-api-base": "*"
+    }
+}

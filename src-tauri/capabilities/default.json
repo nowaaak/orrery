@@ -1,0 +1,49 @@
+{
+    "$schema": "../gen/schemas/desktop-schema.json",
+    "identifier": "default",
+    "description": "Permissions for the main launcher window",
+    "windows": ["main"],
+    "permissions": [
+        "core:default",
+        "core:window:allow-start-dragging",
+        "core:window:allow-internal-toggle-maximize",
+        "core:window:allow-minimize",
+        "core:window:allow-toggle-maximize",
+        "core:window:allow-close",
+        "core:window:allow-is-maximized",
+        {
+            "identifier": "opener:allow-open-url",
+            "allow": [
+                {
+                    "url": "https://www.microsoft.com/link*"
+                },
+                {
+                    "url": "https://microsoft.com/link*"
+                },
+                {
+                    "url": "https://www.microsoft.com/devicelogin*"
+                },
+                {
+                    "url": "https://microsoft.com/devicelogin*"
+                },
+                {
+                    "url": "https://login.microsoft.com/device*"
+                },
+                {
+                    "url": "https://login.live.com/oauth20_remoteconnect.srf*"
+                },
+                {
+                    "url": "https://github.com/nowaaak/orrery/releases*"
+                },
+                {
+                    "url": "https://mclo.gs/*"
+                },
+                {
+                    "url": "https://www.curseforge.com/*"
+                }
+            ]
+        },
+        "dialog:allow-open",
+        "dialog:allow-save"
+    ]
+}

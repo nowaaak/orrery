@@ -1,0 +1,17 @@
+{
+    "app": {
+        "windows": [
+            {
+                "label": "main",
+                "title": "Orrery",
+                "width": 1200,
+                "height": 760,
+                "minWidth": 900,
+                "minHeight": 600,
+                "decorations": true,
+                "titleBarStyle": "Overlay",
+                "hiddenTitle": true
+            }
+        ]
+    }
+}

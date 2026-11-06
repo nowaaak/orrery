@@ -1,0 +1,4 @@
+[env]
+TS_RS_EXPORT_DIR = { value = "src/bindings", relative = true }
+TS_RS_LARGE_INT = "number"
+MS_CLIENT_ID = "a34b4179-63f1-4d94-ba46-8ac5a1a9a710"

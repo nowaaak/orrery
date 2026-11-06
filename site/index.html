@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+        <title>Orrery Launcher</title>
+        <meta
+            name="description"
+            content="Orrery is an independent, free and open-source launcher for Minecraft: Java Edition on Windows, macOS and Linux. Not an official Minecraft product."
+        />
+        <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+        <link rel="stylesheet" href="style.css" />
+        <script src="download.js" defer></script>
+    </head>
+    <body>
+        <header class="top wrap">
+            <a class="brand" href="./">
+                <img src="assets/logo.png" alt="" width="32" height="32" />
+                Orrery
+            </a>
+            <nav class="links" aria-label="Main">
+                <a href="#accounts">Accounts</a>
+                <a href="privacy.html">Privacy</a>
+                <a href="https://github.com/nowaaak/orrery">Source code</a>
+            </nav>
+        </header>
+
+        <main class="wrap">
+            <section class="hero">
+                <h1>An independent, open-source launcher for Minecraft: Java Edition</h1>
+                <p class="lead">
+                    Orrery installs, manages and starts Minecraft: Java Edition on Windows, macOS
+                    and Linux. Every instance keeps its own version, mod loader, mods, worlds and
+                    settings.
+                </p>
+                <div class="actions">
+                    <a class="button primary" href="#download">Download</a>
+                    <a class="button" href="https://github.com/nowaaak/orrery">View on GitHub</a>
+                </div>
+                <p class="note">
+                    Free of charge, no ads, no telemetry. Installers for Windows, macOS (Apple
+                    Silicon and Intel) and Linux (AppImage, deb, rpm).
+                </p>
+                <img
+                    class="shot"
+                    src="assets/instances.png"
+                    width="1920"
+                    height="1200"
+                    alt="Orrery's instance overview with a continue playing card and three instances for Minecraft 1.20.1 with Fabric, 1.8.9 and 1.21.1 with Quilt"
+                />
+            </section>
+
+            <section aria-labelledby="download">
+                <h2 id="download">Download</h2>
+                <div id="download-files">
+                    <p>
+                        Get the installer for your system from the
+                        <a href="https://github.com/nowaaak/orrery/releases/latest"
+                            >latest release</a
+                        >.
+                    </p>
+                </div>
+            </section>
+
+            <section aria-labelledby="features">
+                <h2 id="features">What it does</h2>
+                <div class="grid">
+                    <div class="card">
+                        <h3>Every version from 1.8</h3>
+                        <p>
+                            Releases and snapshots straight from Mojang's version manifest. Every
+                            download is checked against its published hash.
+                        </p>
+                    </div>
+                    <div class="card">
+                        <h3>Java included</h3>
+                        <p>
+                            Orrery picks the Java runtime Mojang publishes for each version, with
+                            Eclipse Adoptium as a fallback.
+                        </p>
+                    </div>
+                    <div class="card">
+                        <h3>Mods and modpacks</h3>
+                        <p>
+                            Fabric, Legacy Fabric, Quilt, Forge and NeoForge, plus mods, resource
+                            packs, shaders and modpacks from Modrinth and CurseForge with their
+                            dependencies.
+                        </p>
+                    </div>
+                    <div class="card">
+                        <h3>Worlds and servers</h3>
+                        <p>
+                            World backups and restore, Quick Play into a world, the in-game server
+                            list with ping and player count.
+                        </p>
+                    </div>
+                    <div class="card">
+                        <h3>Help when the game crashes</h3>
+                        <p>
+                            A live game log, crash detection with the likely cause and a memory
+                            recommendation per instance.
+                        </p>
+                    </div>
+                    <div class="card">
+                        <h3>Orrery Companion</h3>
+                        <p>
+                            An optional client mod for Fabric and Quilt, switchable per instance:
+                            the Orrery title screen, display modules such as FPS, coordinates and
+                            keystrokes, zoom, waypoints and emotes that only you see. No cosmetics,
+                            no capes, nothing that automates play or reveals hidden information.
+                        </p>
+                    </div>
+                    <div class="card">
+                        <h3>Open source</h3>
+                        <p>
+                            Written in Rust and TypeScript with Tauri 2. The full source code is on
+                            GitHub under the GPL-3.0 license.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section aria-labelledby="accounts" class="prose">
+                <h2 id="accounts">Accounts and sign-in</h2>
+                <p>
+                    Playing requires a Microsoft account that owns Minecraft: Java Edition. Orrery
+                    does not sell, unlock or bypass the game.
+                </p>
+                <ul>
+                    <li>
+                        Sign-in uses Microsoft's own device code flow. You enter a code on
+                        <code>microsoft.com/link</code> in your browser. Orrery never sees your
+                        password or verification codes.
+                    </li>
+                    <li>
+                        Orrery requests only the <code>XboxLive.signin</code> and
+                        <code>offline_access</code> scopes, which Minecraft: Java Edition needs to
+                        start the game. The Microsoft refresh token is stored in the system keychain
+                        of your computer, the Minecraft access token only in memory.
+                    </li>
+                    <li>
+                        Account data is only sent to Microsoft, Xbox Live and Minecraft services.
+                        Orrery has no server of its own.
+                    </li>
+                    <li>
+                        Every game start, in singleplayer and on any server, signs in again online
+                        and checks with Mojang that the account owns Minecraft: Java Edition. The
+                        player name and UUID come from that verified profile. Without internet or
+                        when the check fails, the game does not start.
+                    </li>
+                    <li>
+                        Orrery has no offline accounts, no username-only profiles, no demo mode and
+                        no alternative authentication services. No development or testing switch
+                        skips the sign-in.
+                    </li>
+                    <li>
+                        Capes: Orrery only lets you choose between the capes your Minecraft profile
+                        owns. It offers no other capes.
+                    </li>
+                </ul>
+                <div class="card status">
+                    <p>
+                        Status: Mojang has not yet approved Orrery's Microsoft app registration for
+                        Minecraft services. Until then, signing in stops after the Microsoft step
+                        with a clear message, and no game can be started.
+                    </p>
+                </div>
+            </section>
+        </main>
+
+        <footer class="wrap">
+            <p>
+                NOT AN OFFICIAL MINECRAFT PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH MOJANG OR
+                MICROSOFT. Minecraft is a trademark of Mojang Synergies AB.
+            </p>
+            <p>
+                <a href="privacy.html">Privacy</a> · <a href="code-signing.html">Code signing</a> ·
+                <a href="mailto:nxwaaak@gmail.com">Contact</a> ·
+                <a href="https://github.com/nowaaak/orrery/issues">Issues</a> ·
+                <a href="https://github.com/nowaaak/orrery">Source code</a> ·
+                <a href="https://github.com/nowaaak/orrery/blob/main/LICENSE">License: GPL-3.0</a>
+            </p>
+        </footer>
+    </body>
+</html>

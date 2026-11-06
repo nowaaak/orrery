@@ -1,0 +1,44 @@
+[workspace]
+resolver = "3"
+members = ["crates/orrery-core", "src-tauri"]
+
+[workspace.package]
+version = "0.3.0"
+edition = "2024"
+license = "GPL-3.0-only"
+rust-version = "1.99"
+
+[workspace.dependencies]
+orrery-core = { path = "crates/orrery-core" }
+flate2 = "1"
+futures = "0.3"
+hex = "0.4"
+keyring = "4.2"
+reqwest = { version = "0.13", features = ["form", "json", "query", "stream"] }
+rusqlite = { version = "0.41", features = ["bundled"] }
+serde = { version = "1.0", features = ["derive"] }
+sha1 = "0.11"
+sha2 = "0.11"
+sysinfo = { version = "0.40", default-features = false, features = ["disk", "system"] }
+tar = "0.4"
+uuid = { version = "1", features = ["serde", "v4"] }
+wiremock = "0.6"
+zip = { version = "9", default-features = false, features = ["deflate-flate2-zlib-rs"] }
+serde_json = "1.0"
+thiserror = "2.0"
+tokio = { version = "1.54", features = ["fs", "io-util", "macros", "net", "process", "rt-multi-thread", "sync", "time"] }
+tokio-util = "0.7"
+tracing = "0.1"
+ts-rs = "12.0"
+tempfile = "3"
+
+[workspace.lints.rust]
+unsafe_code = "forbid"
+
+[workspace.lints.clippy]
+all = { level = "warn", priority = -1 }
+
+[profile.release]
+codegen-units = 1
+lto = true
+strip = true

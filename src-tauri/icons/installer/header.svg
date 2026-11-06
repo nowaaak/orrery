@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="150" height="57" viewBox="0 0 150 57">
+    <defs>
+        <radialGradient id="sun" cx="42%" cy="38%" r="65%">
+            <stop offset="0" stop-color="#fff4c2"/>
+            <stop offset="0.45" stop-color="#fbbf24"/>
+            <stop offset="1" stop-color="#d97706"/>
+        </radialGradient>
+        <linearGradient id="ringA" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#818cf8"/>
+            <stop offset="1" stop-color="#4f46e5"/>
+        </linearGradient>
+        <linearGradient id="ringB" x1="1" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#22d3ee"/>
+            <stop offset="1" stop-color="#0891b2"/>
+        </linearGradient>
+    </defs>
+    <rect width="150" height="57" fill="#ffffff"/>
+    <g transform="translate(30 28.5) scale(0.052) translate(-512 -512)">
+        <g transform="rotate(-24 512 512)">
+            <ellipse cx="512" cy="512" rx="370" ry="150" fill="none" stroke="url(#ringA)" stroke-width="42"/>
+        </g>
+        <g transform="rotate(32 512 512)">
+            <ellipse cx="512" cy="512" rx="300" ry="112" fill="none" stroke="url(#ringB)" stroke-width="38"/>
+        </g>
+        <circle cx="512" cy="512" r="140" fill="url(#sun)"/>
+        <circle cx="845" cy="362" r="62" fill="#6366f1"/>
+        <circle cx="282" cy="692" r="50" fill="#06b6d4"/>
+    </g>
+    <text x="56" y="35" font-family="Segoe UI, Arial, sans-serif" font-size="19" font-weight="600" fill="#11153a" letter-spacing="0.3">Orrery</text>
+</svg>

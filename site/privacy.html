@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+        <title>Orrery Privacy</title>
+        <meta
+            name="description"
+            content="What data the Orrery launcher stores and sends, and where."
+        />
+        <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <header class="top wrap">
+            <a class="brand" href="./">
+                <img src="assets/logo.png" alt="" width="32" height="32" />
+                Orrery
+            </a>
+            <nav class="links" aria-label="Main">
+                <a href="./#accounts">Accounts</a>
+                <a href="privacy.html" aria-current="page">Privacy</a>
+                <a href="https://github.com/nowaaak/orrery">Source code</a>
+            </nav>
+        </header>
+
+        <main class="wrap prose">
+            <h1>Privacy</h1>
+            <p class="note">Last updated: 5 November 2026</p>
+
+            <p>
+                Orrery is a desktop application that runs on your computer. It has no server, no
+                user database, no analytics and no telemetry. The developer does not receive any
+                data about you or about how you use Orrery.
+            </p>
+
+            <h2>Data stored on your computer</h2>
+            <ul>
+                <li>
+                    <strong>Microsoft sign-in.</strong> After you sign in, Orrery stores the
+                    Microsoft refresh token in the system keychain (Windows Credential Manager,
+                    macOS Keychain or the Secret Service on Linux). The short-lived Minecraft access
+                    token is kept in memory only while Orrery runs and is never written to disk.
+                    Every game start signs in again online. Removing the account deletes the refresh
+                    token.
+                </li>
+                <li>
+                    <strong>Account list.</strong> Player name, player UUID and skin details of the
+                    accounts you added, in Orrery's settings folder.
+                </li>
+                <li>
+                    <strong>Game data.</strong> Instances, worlds, mods, screenshots, logs, playtime
+                    and launcher settings in Orrery's data folder.
+                </li>
+            </ul>
+            <p>
+                Removing an account in Orrery deletes its stored sign-in. Uninstalling Orrery and
+                deleting its data folder removes everything else.
+            </p>
+
+            <h2>Services Orrery connects to</h2>
+            <p>
+                Orrery only contacts the following services, and only for the purpose listed. Each
+                service handles requests under its own privacy policy.
+            </p>
+            <div class="table-scroll">
+                <table>
+                    <thead>
+                        <tr>
+                            <th scope="col">Service</th>
+                            <th scope="col">Purpose</th>
+                            <th scope="col">What is sent</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Microsoft identity platform, Xbox Live, Minecraft services</td>
+                            <td>
+                                Sign-in, checking game ownership, starting the game, skins and capes
+                            </td>
+                            <td>
+                                The tokens of the sign-in you started, and skins you choose to
+                                upload
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Mojang (piston-meta, libraries, resources, session server)</td>
+                            <td>
+                                Game versions, game files, Java runtimes, looking up player skins
+                            </td>
+                            <td>Standard download requests, player names you look up</td>
+                        </tr>
+                        <tr>
+                            <td>Fabric, Legacy Fabric and Quilt meta and Maven servers</td>
+                            <td>Mod loader versions and files</td>
+                            <td>Standard download requests</td>
+                        </tr>
+                        <tr>
+                            <td>NeoForged Maven (maven.neoforged.net)</td>
+                            <td>NeoForge versions, its installer and libraries</td>
+                            <td>Standard download requests</td>
+                        </tr>
+                        <tr>
+                            <td>Forge Maven (maven.minecraftforge.net)</td>
+                            <td>Forge versions, its installer and libraries</td>
+                            <td>Standard download requests</td>
+                        </tr>
+                        <tr>
+                            <td>Modrinth</td>
+                            <td>Searching and installing mods, packs and modpacks</td>
+                            <td>
+                                Your search terms, the selected Minecraft version and loader, and
+                                hashes of installed files to find updates
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>CurseForge (api.curseforge.com, forgecdn.net)</td>
+                            <td>
+                                Searching and installing mods, packs and modpacks, only in builds
+                                with a CurseForge API key
+                            </td>
+                            <td>
+                                Your search terms, the selected Minecraft version and loader, the
+                                ids of installed projects for updates, and fingerprints of files
+                                when you export a CurseForge modpack
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Eclipse Adoptium</td>
+                            <td>Java runtime when Mojang has none for your system</td>
+                            <td>Your operating system and architecture</td>
+                        </tr>
+                        <tr>
+                            <td>GitHub</td>
+                            <td>Checking for and downloading Orrery updates</td>
+                            <td>Standard download requests</td>
+                        </tr>
+                        <tr>
+                            <td>mclo.gs</td>
+                            <td>
+                                Sharing a game log, only when you press Share and confirm the
+                                preview
+                            </td>
+                            <td>
+                                The log text with access tokens, IP addresses, user names and home
+                                folder paths removed
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Minecraft servers in your server list</td>
+                            <td>Showing status, player count and ping</td>
+                            <td>A standard server list ping</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p>
+                Like every network request, these requests carry your IP address. Orrery identifies
+                itself with a user agent that names Orrery, its version and its source code
+                repository.
+            </p>
+
+            <h2>Local connections</h2>
+            <p>
+                Discord Rich Presence talks only to the Discord app on your own computer and can be
+                switched off in the settings. The optional Orrery Companion mod connects to the
+                launcher over <code>127.0.0.1</code> and never leaves your computer.
+            </p>
+
+            <h2>Children</h2>
+            <p>
+                Orrery follows the restrictions Microsoft and Xbox apply to child accounts. It does
+                not collect data from anyone.
+            </p>
+
+            <h2>Changes and contact</h2>
+            <p>
+                Changes to this page are tracked in the
+                <a href="https://github.com/nowaaak/orrery/commits/main/site/privacy.html"
+                    >public repository</a
+                >. Questions can be asked through
+                <a href="https://github.com/nowaaak/orrery/issues">GitHub issues</a> or by email to
+                <a href="mailto:nxwaaak@gmail.com">nxwaaak@gmail.com</a>.
+            </p>
+        </main>
+
+        <footer class="wrap">
+            <p>
+                NOT AN OFFICIAL MINECRAFT PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH MOJANG OR
+                MICROSOFT. Minecraft is a trademark of Mojang Synergies AB.
+            </p>
+            <p>
+                <a href="./">Home</a> · <a href="code-signing.html">Code signing</a> ·
+                <a href="mailto:nxwaaak@gmail.com">Contact</a> ·
+                <a href="https://github.com/nowaaak/orrery/issues">Issues</a> ·
+                <a href="https://github.com/nowaaak/orrery">Source code</a> ·
+                <a href="https://github.com/nowaaak/orrery/blob/main/LICENSE">License: GPL-3.0</a>
+            </p>
+        </footer>
+    </body>
+</html>
