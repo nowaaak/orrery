@@ -99,7 +99,11 @@ public record LastPlayed(String kind, String target, String name) {
         if (data.isRealm()) {
             return null;
         }
-        //?}
+        //?} else {
+        /*if (minecraft.isConnectedToRealms()) {
+            return null;
+        }
+        *///?}
         return of(SERVER, data.ip, data.name);
     }
 

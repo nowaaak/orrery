@@ -105,7 +105,8 @@ fn validate_java(java: &JavaSettings) -> CoreResult<()> {
     {
         return Err(CoreError::InvalidInput("Java path must be absolute".into()));
     }
-    validate_args(&java.extra_jvm_args, "JVM")
+    validate_args(&java.extra_jvm_args, "JVM")?;
+    super::check_jvm_args(&java.extra_jvm_args)
 }
 
 fn validate_args(args: &[String], what: &str) -> CoreResult<()> {
@@ -134,6 +135,7 @@ fn normalize_launch(launch: LaunchSettings) -> CoreResult<LaunchSettings> {
         ..launch
     };
     validate_args(&launch.extra_game_args, "game")?;
+    super::check_launch(&launch)?;
     if let Some(server) = &launch.join_server {
         ServerAddress::parse(server)?;
     }

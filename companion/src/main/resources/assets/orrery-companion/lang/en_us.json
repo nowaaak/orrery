@@ -108,6 +108,7 @@
     "orrery-companion.waypoints.name": "Name",
     "orrery-companion.waypoints.add": "Set here",
     "orrery-companion.waypoints.need_world": "Join a world or server to manage its waypoints",
+    "orrery-companion.waypoints.reduced": "This world hides coordinates, so waypoints are off here",
     "orrery-companion.waypoints.empty": "No waypoints yet. Press B in game or set one here",
     "orrery-companion.waypoints.row": "%s  %s %s %s  %s",
     "orrery-companion.waypoints.delete": "Delete waypoint",

@@ -167,7 +167,7 @@ public class OrreryTitleScreen extends Screen {
             int rowY = panelTop + 4;
             OrreryButton realms = addRenderableWidget(row(rowX, rowY, rowWidth, Component.translatable("menu.online"),
                     () -> Screens.open(minecraft, new RealmsMainScreen(this))));
-            realms.active = minecraft.allowsRealms();
+            realms.active = minecraft.allowsMultiplayer() && minecraft.allowsRealms();
             rowY += ROW_HEIGHT;
             addRenderableWidget(row(rowX, rowY, rowWidth, Component.translatable("options.language"),
                     () -> Screens.open(minecraft, new LanguageSelectScreen(this, minecraft.options, minecraft.getLanguageManager()))));

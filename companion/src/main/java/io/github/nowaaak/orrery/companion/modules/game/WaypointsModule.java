@@ -54,7 +54,7 @@ public class WaypointsModule extends Module {
         while (Keys.waypoint.consumeClick()) {
             presses++;
         }
-        if (!isActive() || player == null || minecraft.level == null) {
+        if (!isActive() || !available(minecraft)) {
             deathRecorded = dead;
             return;
         }
@@ -71,14 +71,21 @@ public class WaypointsModule extends Module {
         deathRecorded = dead;
     }
 
+    public static boolean available(Minecraft minecraft) {
+        return minecraft.player != null && minecraft.level != null && !minecraft.showOnlyReducedInfo();
+    }
+
     public List<Waypoints.Waypoint> list(Minecraft minecraft) {
+        if (!available(minecraft)) {
+            return List.of();
+        }
         return Waypoints.list(LastPlayed.context(minecraft));
     }
 
     public void add(Minecraft minecraft, String name) {
         LocalPlayer player = minecraft.player;
         String clean = Waypoints.cleanName(name);
-        if (player == null || minecraft.level == null || clean.isEmpty()) {
+        if (!available(minecraft) || clean.isEmpty()) {
             return;
         }
         Waypoints.add(LastPlayed.context(minecraft), new Waypoints.Waypoint(clean, player.getBlockX(), player.getBlockY(), player.getBlockZ(),
@@ -91,7 +98,7 @@ public class WaypointsModule extends Module {
 
     public void drawCompass(Canvas canvas, Minecraft minecraft) {
         LocalPlayer player = minecraft.player;
-        if (!isActive() || player == null || minecraft.level == null) {
+        if (!isActive() || !available(minecraft)) {
             return;
         }
         String dimension = dimension(minecraft);

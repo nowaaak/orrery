@@ -280,6 +280,8 @@ impl Services {
         server: Option<&ServerAddress>,
         progress: &Progress,
     ) -> CoreResult<()> {
+        crate::instances::check_jvm_args(&instance.java.extra_jvm_args)?;
+        crate::instances::check_launch(&instance.launch)?;
         progress.set_stage(Stage::Authenticating);
         let account = self
             .accounts

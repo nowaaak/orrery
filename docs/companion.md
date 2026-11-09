@@ -73,27 +73,27 @@ Module ids match `[a-z0-9_]{1,32}`, at most 64 are read, and the payload may be 
 
 Every feature of the mod is a module with an id. The Orrery menu lists them under Modules, and every module is off until the player switches it on. A module that the server switched off through `orrery:policy` is greyed out.
 
-| Id              | Module                                                                              |
-| --------------- | ----------------------------------------------------------------------------------- |
-| `fps`           | Frames per second                                                                   |
-| `coordinates`   | Block coordinates, biome and facing. Hidden when the server sets `reducedDebugInfo` |
-| `clock`         | Local time                                                                          |
-| `memory`        | Java heap use                                                                       |
-| `server`        | Server address and ping, only on servers                                            |
-| `keystrokes`    | Movement keys, both mouse buttons with clicks per second and the jump key           |
-| `cps`           | Clicks per second for both mouse buttons, counted from the raw mouse input          |
-| `durability`    | Armor and the items in both hands with their remaining durability                   |
-| `effects`       | Active status effects with level and remaining time in the effect color             |
-| `zoom`          | Smooth zoom while the zoom key (C) is held, mouse wheel changes the zoom level      |
-| `crosshair`     | Own crosshair: cross, dot, cross with dot, circle or T, with length, gap, color     |
-| `low_fire`      | Moves the burning overlay down so it covers less of the screen                      |
-| `hand_position` | Moves the held item sideways, up or down and closer or further away                 |
+| Id              | Module                                                                                                            |
+| --------------- | ----------------------------------------------------------------------------------------------------------------- |
+| `fps`           | Frames per second                                                                                                 |
+| `coordinates`   | Block coordinates, biome and facing. Hidden when the server sets `reducedDebugInfo`                               |
+| `clock`         | Local time                                                                                                        |
+| `memory`        | Java heap use                                                                                                     |
+| `server`        | Server address and ping, only on servers                                                                          |
+| `keystrokes`    | Movement keys, both mouse buttons with clicks per second and the jump key                                         |
+| `cps`           | Clicks per second for both mouse buttons, counted from the raw mouse input                                        |
+| `durability`    | Armor and the items in both hands with their remaining durability                                                 |
+| `effects`       | Active status effects with level and remaining time in the effect color                                           |
+| `zoom`          | Smooth zoom while the zoom key (C) is held, mouse wheel changes the zoom level up to the strength of the spyglass |
+| `crosshair`     | Own crosshair: cross, dot, cross with dot, circle or T, with length, gap, color                                   |
+| `low_fire`      | Moves the burning overlay down so it covers less of the screen                                                    |
+| `hand_position` | Moves the held item sideways, up or down and closer or further away                                               |
 
 | `chat` | Timestamps, stacking of repeated messages (`×3`) and a longer history (up to 1000) |
 
 | `waypoints` | Waypoints per world or server and dimension, a compass bar with name and distance |
 
-Waypoints are set with B or in the waypoint screen behind the settings button of the module, and the death point replaces the previous one on every death. They live in `waypoints.json`, keyed by `world:<folder>` or `server:<address>`.
+Waypoints are set with B or in the waypoint screen behind the settings button of the module, and the death point replaces the previous one on every death. They live in `waypoints.json`, keyed by `world:<folder>` or `server:<address>`. When a world or server hides coordinates through reduced debug info, the module is off: no new waypoints, no death point, no compass bar and no list with coordinates.
 
 The chat history in the Orrery menu lists the stored messages. A click copies a message to the clipboard. Vanilla has no way to find the chat line under the mouse, so copying lives in this screen instead of the chat itself.
 
@@ -140,5 +140,5 @@ All files are written atomically. An unreadable file is ignored and logged.
 
 - Only display and comfort features. Nothing automates movement or combat, changes brightness or the camera beyond vanilla, or reveals hidden information.
 - Every module obeys `orrery:policy`.
-- The title screens follow the game's own safety checks. Multiplayer, Realms and the continue button for a server are only offered when `allowsMultiplayer` and `allowsRealms` allow it, so parental controls and multiplayer bans apply. Nothing reconnects to a server by itself.
+- The title screens follow the game's own safety checks. Multiplayer and the continue button for a server are only offered when `allowsMultiplayer` allows it, and Realms needs both `allowsMultiplayer` and `allowsRealms`, like in the vanilla menu, so parental controls and multiplayer bans apply. The continue button never remembers a Realm. Nothing reconnects to a server by itself.
 - The mod makes no network connections of its own apart from the local bridge.

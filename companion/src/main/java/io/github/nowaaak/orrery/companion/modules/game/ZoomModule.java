@@ -7,7 +7,7 @@ import net.minecraft.client.Minecraft;
 
 public class ZoomModule extends Module {
     private static final float DEFAULT_FACTOR = 0.25f;
-    private static final float MIN_FACTOR = 0.05f;
+    private static final float MIN_FACTOR = 0.1f;
     private static final float MAX_FACTOR = 0.8f;
     private static final float SCROLL_STEP = 1.25f;
     private static final float SPEED = 12f;

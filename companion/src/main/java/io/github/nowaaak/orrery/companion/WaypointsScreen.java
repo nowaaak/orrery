@@ -3,6 +3,7 @@ package io.github.nowaaak.orrery.companion;
 import io.github.nowaaak.orrery.companion.modules.ModuleSettings;
 import io.github.nowaaak.orrery.companion.modules.Modules;
 import io.github.nowaaak.orrery.companion.modules.game.Waypoints;
+import io.github.nowaaak.orrery.companion.modules.game.WaypointsModule;
 import java.util.List;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.CycleButton;
@@ -32,7 +33,10 @@ public class WaypointsScreen extends OrreryBaseScreen {
         int titleWidth = font.width(title);
         addRenderableWidget(new StringWidget(width / 2 - titleWidth / 2, y, titleWidth, font.lineHeight, title, font));
         y += 18;
-        boolean inWorld = minecraft.player != null && minecraft.level != null;
+        boolean inWorld = WaypointsModule.available(minecraft);
+        String unavailable = minecraft.player != null && minecraft.level != null
+                ? "orrery-companion.waypoints.reduced"
+                : "orrery-companion.waypoints.need_world";
         String previous = name == null ? "" : name.getValue();
         name = new EditBox(font, left, y, WIDTH - 104, 20, Component.translatable("orrery-companion.waypoints.name"));
         name.setMaxLength(MAX_NAME);
@@ -44,7 +48,7 @@ public class WaypointsScreen extends OrreryBaseScreen {
                 .build());
         add.active = inWorld;
         if (!inWorld) {
-            add.setTooltip(Tooltip.create(Component.translatable("orrery-companion.waypoints.need_world")));
+            add.setTooltip(Tooltip.create(Component.translatable(unavailable)));
         }
         y += 24;
         addRenderableWidget(CycleButton.onOffBuilder(Modules.WAYPOINTS.option(Modules.WAYPOINTS.deathOption()) == 1)
@@ -55,7 +59,7 @@ public class WaypointsScreen extends OrreryBaseScreen {
         List<Waypoints.Waypoint> waypoints = inWorld ? Modules.WAYPOINTS.list(minecraft) : List.of();
         int rows = Math.max(0, (height - y - 36) / ROW);
         if (waypoints.isEmpty()) {
-            Component empty = Component.translatable(inWorld ? "orrery-companion.waypoints.empty" : "orrery-companion.waypoints.need_world");
+            Component empty = Component.translatable(inWorld ? "orrery-companion.waypoints.empty" : unavailable);
             int emptyWidth = font.width(empty);
             addRenderableWidget(new StringWidget(width / 2 - emptyWidth / 2, y + 4, emptyWidth, font.lineHeight, empty, font));
         }

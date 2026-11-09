@@ -108,6 +108,7 @@
     "orrery-companion.waypoints.name": "Name",
     "orrery-companion.waypoints.add": "Hier setzen",
     "orrery-companion.waypoints.need_world": "Betritt eine Welt oder einen Server, um Wegpunkte zu verwalten",
+    "orrery-companion.waypoints.reduced": "Diese Welt blendet Koordinaten aus, deshalb sind Wegpunkte hier aus",
     "orrery-companion.waypoints.empty": "Noch keine Wegpunkte. Drücke B im Spiel oder setze hier einen",
     "orrery-companion.waypoints.row": "%s  %s %s %s  %s",
     "orrery-companion.waypoints.delete": "Wegpunkt löschen",
