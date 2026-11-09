@@ -1,37 +1,37 @@
 # Roadmap
 
-| Milestone | Scope                                                                                                                 | Status                                                                            |
-| --------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| M0        | Workspace, error handling, paths, storage, task system, CI                                                            | Done                                                                              |
-| M1        | Vanilla install and launch for releases and snapshots from 1.8, Java runtimes                                         | Done                                                                              |
-| M2        | Account switcher, local skins                                                                                         | Done. No offline accounts, every start needs an owned game                        |
-| M3        | Microsoft login with device code, keyring storage, automatic refresh                                                  | Done, needs Mojang approval of the Azure app for real logins                      |
-| M4        | Fabric through the Fabric Meta API                                                                                    | Done                                                                              |
-| M5        | Instance management (create, edit, duplicate, delete, open folder, repair)                                            | Done                                                                              |
-| M6        | Modrinth search and per-instance installation with dependencies                                                       | Done                                                                              |
-| M7        | Signed auto updates and GitHub release pipeline                                                                       | Done, needs repository secrets                                                    |
-| M8        | Logo, dark space theme, memory recommendation, crash detection, playtime, mod updates, folder shortcuts               | Done                                                                              |
-| M9        | Quilt, resource packs and shaders, performance pack, hardware based game options, dedicated GPU preference on Windows | Done                                                                              |
-| M10       | Modpacks (.mrpack), world manager, storage cleanup, command palette, English translation                              | Done                                                                              |
-| M11       | Launch options, join server on launch, game log search and sharing                                                    | Done                                                                              |
-| M12       | Instance groups, servers tab with ping, screenshots, data packs, shortcuts, drag and drop                             | Done                                                                              |
-| M13       | Discord Rich Presence                                                                                                 | Done, needs a Discord application id                                              |
-| M14       | OptiFine replacement pack, OptiFine resource pack detection, more smart packs                                         | Done                                                                              |
-| M15       | 3D skin viewer, skin library, skin upload and cape selection                                                          | Done, upload needs Mojang approval                                                |
-| M16       | Companion mod foundation with launcher bridge and server policy channel                                               | Done                                                                              |
-| M17       | In-game HUD editor, HUD modules and quality of life features                                                          | Done                                                                              |
-| M18       | Cosmetics without a backend                                                                                           | Removed, not planned                                                              |
-| M19       | Import from other launchers                                                                                           | Done, a real export only tested for Prism Launcher                                |
-| M20       | CurseForge                                                                                                            | Done, RLCraft installed and started with a real key                               |
-| M21       | Forge, NeoForge, Legacy Fabric and guided OptiFine import                                                             | Done                                                                              |
-| M22       | Crash assistant with fixes and mod bisect                                                                             | Planned, phase D                                                                  |
-| M23       | Play with friends                                                                                                     | Planned, phase D                                                                  |
-| M24       | Polish, accessibility, CLI and automation                                                                             | Planned, phase D                                                                  |
-| M25       | Orrery Shaders, an own shader pack for Iris built into the launcher                                                   | Stage 2 done, prioritized                                                         |
-| M26       | Orrery Menu, an own main menu design built into the launcher                                                          | Stage 1 and 2 done, prioritized                                                   |
-| M27       | First run, data safety and licenses                                                                                   | Done                                                                              |
-| M28       | Sync packs                                                                                                            | Stage 1 done, not yet tried in the real app                                       |
-| M29       | Browser login and distribution                                                                                        | Download page done, code signing applied for, browser login needs Mojang approval |
+| Milestone | Scope                                                                                              | Status                             |
+| --------- | -------------------------------------------------------------------------------------------------- | ---------------------------------- |
+| M0        | Workspace, error handling, paths, storage, task system, CI                                         | Done                               |
+| M1        | Vanilla install and launch for releases and snapshots from 1.8, Java runtimes                      | Done                               |
+| M2        | Account switcher, local skins                                                                      | Done, no offline accounts          |
+| M3        | Microsoft login in the browser or with a code, keyring storage, automatic refresh                  | Done, needs Mojang approval        |
+| M4        | Fabric through the Fabric Meta API                                                                 | Done                               |
+| M5        | Instance management (create, edit, duplicate, delete, open folder, repair)                         | Done                               |
+| M6        | Modrinth search and per-instance installation with dependencies                                    | Done                               |
+| M7        | Signed auto updates and GitHub release pipeline                                                    | Done                               |
+| M8        | Logo, space theme, memory recommendation, crash detection, playtime, mod updates, folder shortcuts | Done                               |
+| M9        | Quilt, resource packs, shaders, performance pack, hardware based options, dedicated GPU on Windows | Done                               |
+| M10       | Modpacks (.mrpack), world manager, storage cleanup, command palette, English translation           | Done                               |
+| M11       | Launch options, join server on launch, game log search and sharing                                 | Done                               |
+| M12       | Instance groups, servers tab with ping, screenshots, data packs, shortcuts, drag and drop          | Done                               |
+| M13       | Discord Rich Presence                                                                              | Done, needs a Discord app id       |
+| M14       | OptiFine replacement pack, OptiFine resource pack detection, more smart packs                      | Done                               |
+| M15       | 3D skin viewer, skin library, skin upload and cape selection                                       | Done, upload needs Mojang approval |
+| M16       | Companion mod foundation with launcher bridge and server policy channel                            | Done                               |
+| M17       | In-game HUD editor, HUD modules and quality of life features                                       | Done                               |
+| M18       | Cosmetics without a backend                                                                        | Removed, not planned               |
+| M19       | Import from other launchers                                                                        | Done, real export only from Prism  |
+| M20       | CurseForge                                                                                         | Done, tested with RLCraft          |
+| M21       | Forge, NeoForge, Legacy Fabric and guided OptiFine import                                          | Done                               |
+| M22       | Crash assistant with fixes and mod bisect                                                          | Planned, phase D                   |
+| M23       | Play with friends                                                                                  | Planned, phase D                   |
+| M24       | Polish, accessibility, CLI and automation                                                          | Planned, phase D                   |
+| M25       | Orrery Shaders, an own shader pack for Iris built into the launcher                                | Stage 2 done, prioritized          |
+| M26       | Orrery Menu, an own main menu design built into the launcher                                       | Stages 1 and 2 done, prioritized   |
+| M27       | First run, data safety and licenses                                                                | Done                               |
+| M28       | Sync packs                                                                                         | Stage 1 done, untested in the app  |
+| M29       | Browser login and distribution                                                                     | Partly done, code signing open     |
 
 ## Verified manually
 
@@ -71,7 +71,7 @@
 ## Open items
 
 - macOS and Linux have only been verified through CI builds, not by starting the game
-- Microsoft login has only been tested against a mock server
+- Microsoft login has been tested on Windows against the real services up to Xbox Live and XSTS. The Minecraft login step stays blocked until Mojang approves the Azure app
 - Import from the Modrinth App, CurseForge, ATLauncher, GDLauncher and the official launcher is only tested with fixtures built from their source code, not with real exports. Forge, NeoForge and Legacy Fabric instances from other launchers are only covered by these fixtures
 - Log sharing has only been tested against a mock of the mclo.gs API, no real upload yet
 - Feral GameMode, MangoHud and PRIME offload need a check on a Linux machine
