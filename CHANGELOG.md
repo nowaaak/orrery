@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.5.1
 
 - The welcome screen with the sign-in appears on every start while no account is signed in. Continuing without an account only skips it until Orrery is closed
 
