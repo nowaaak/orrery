@@ -22,7 +22,7 @@ export const de = {
         startFailed: "Anmeldung konnte nicht gestartet werden",
         title: "Microsoft-Account hinzufügen",
         description:
-            "Anmeldung im Browser per Code. Unabhängig vom Windows-, Store- oder Xbox-Login. Die Anmeldung wird im Schlüsselbund des Systems gespeichert.",
+            "Anmeldung im Browser auf Microsofts eigener Seite. Unabhängig vom Windows-, Store- oder Xbox-Login. Die Anmeldung wird im Schlüsselbund des Systems gespeichert.",
         noClientId:
             "In diesem Build ist keine Microsoft-Client-ID hinterlegt. Setze beim Bauen die Umgebungsvariable MS_CLIENT_ID.",
         signIn: "Mit Microsoft anmelden",
@@ -41,6 +41,14 @@ export const de = {
         openPage: "Anmeldeseite öffnen",
         orOpenInBrowser: "Oder im Browser öffnen:",
         waiting: "Warte auf die Anmeldung …",
+        browserTitle: "Im Browser anmelden",
+        browserDescription:
+            "Wähle im Browser das Microsoft-Konto, mit dem du Minecraft: Java Edition gekauft hast. Danach geht es hier automatisch weiter.",
+        reopenBrowser: "Browser erneut öffnen",
+        useCode: "Stattdessen mit Code anmelden",
+        pageSuccess: "Du kannst dieses Fenster schließen und zu Orrery zurückkehren.",
+        pageFailure:
+            "Die Anmeldung wurde nicht abgeschlossen. Du kannst dieses Fenster schließen und es in Orrery erneut versuchen.",
     },
     switcher: {
         noAccount: "Kein Account",
@@ -73,7 +81,7 @@ export const en: typeof de = {
         startFailed: "Could not start the sign-in",
         title: "Add Microsoft account",
         description:
-            "Sign in with a code in your browser. Separate from your Windows, Store or Xbox sign-in. The sign-in is stored in the system keychain.",
+            "Sign in on Microsoft's own page in your browser. Separate from your Windows, Store or Xbox sign-in. The sign-in is stored in the system keychain.",
         noClientId:
             "This build has no Microsoft client ID. Set the MS_CLIENT_ID environment variable when building.",
         signIn: "Sign in with Microsoft",
@@ -91,6 +99,14 @@ export const en: typeof de = {
         openPage: "Open sign-in page",
         orOpenInBrowser: "Or open in your browser:",
         waiting: "Waiting for sign-in …",
+        browserTitle: "Sign in with your browser",
+        browserDescription:
+            "In your browser, choose the Microsoft account you bought Minecraft: Java Edition with. The launcher continues automatically once you are done.",
+        reopenBrowser: "Open browser again",
+        useCode: "Sign in with a code instead",
+        pageSuccess: "You can close this window and return to Orrery.",
+        pageFailure:
+            "The sign-in was not completed. You can close this window and try again in Orrery.",
     },
     switcher: {
         noAccount: "No account",

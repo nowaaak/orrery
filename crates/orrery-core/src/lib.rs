@@ -6,6 +6,7 @@ pub mod curseforge;
 pub mod data_dir;
 pub mod datapacks;
 pub mod discord;
+mod encoding;
 pub mod error;
 pub mod extras;
 pub mod game_options;

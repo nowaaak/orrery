@@ -6,8 +6,9 @@ use serde::Serialize;
 use tokio_util::sync::CancellationToken;
 use ts_rs::TS;
 
+use super::loopback::{LoginPage, Loopback};
 use super::minecraft::{self, Profile};
-use super::oauth::{self, PollResult};
+use super::oauth::{self, Pkce, PollResult};
 use super::{AuthFailure, Endpoints, xbox};
 use crate::CoreResult;
 use crate::auth::account::{Account, AccountKind, Skin};
@@ -18,6 +19,15 @@ use crate::net::Http;
 use crate::storage::unix_now;
 
 const REFRESH_MARGIN_SECS: i64 = 5 * 60;
+const BROWSER_LOGIN_TIMEOUT: Duration = Duration::from_secs(10 * 60);
+
+#[derive(Debug, Clone, Serialize, TS)]
+#[serde(rename_all = "camelCase")]
+#[ts(export)]
+pub struct BrowserLoginInfo {
+    pub login_id: String,
+    pub authorize_url: String,
+}
 
 #[derive(Debug, Clone, Serialize, TS)]
 #[serde(rename_all = "camelCase")]
@@ -122,33 +132,84 @@ impl MicrosoftAuth {
     pub async fn begin_login(self: &Arc<Self>) -> CoreResult<DeviceCodeInfo> {
         let client_id = self.client_id()?.to_string();
         let code = oauth::request_device_code(&self.http, &self.endpoints, &client_id).await?;
-        let login_id = uuid::Uuid::new_v4().to_string();
-        let cancel = CancellationToken::new();
-        lock(&self.logins).insert(login_id.clone(), cancel.clone());
-
         let info = DeviceCodeInfo {
-            login_id: login_id.clone(),
+            login_id: uuid::Uuid::new_v4().to_string(),
             user_code: code.user_code.clone(),
             verification_uri: code.verification_uri.clone(),
             expires_in: code.expires_in,
         };
 
         let auth = self.clone();
+        self.spawn_login(info.login_id.clone(), async move {
+            auth.complete_login(&client_id, code).await
+        });
+        Ok(info)
+    }
+
+    pub async fn begin_browser_login(
+        self: &Arc<Self>,
+        page: LoginPage,
+    ) -> CoreResult<BrowserLoginInfo> {
+        let client_id = self.client_id()?.to_string();
+        let loopback = Loopback::bind().await?;
+        let redirect_uri = loopback.redirect_uri();
+        let pkce = Pkce::generate();
+        let state = uuid::Uuid::new_v4().simple().to_string();
+        let info = BrowserLoginInfo {
+            login_id: uuid::Uuid::new_v4().to_string(),
+            authorize_url: oauth::authorize_url(
+                &self.endpoints,
+                &client_id,
+                &redirect_uri,
+                &pkce.challenge,
+                &state,
+            )?,
+        };
+
+        let auth = self.clone();
+        self.spawn_login(info.login_id.clone(), async move {
+            let code = tokio::time::timeout(BROWSER_LOGIN_TIMEOUT, loopback.wait(&state, &page))
+                .await
+                .map_err(|_| AuthFailure::Expired.error("the browser sign-in timed out"))??;
+            drop(loopback);
+            let tokens = oauth::exchange_code(
+                &auth.http,
+                &auth.endpoints,
+                &client_id,
+                &code,
+                &redirect_uri,
+                &pkce.verifier,
+            )
+            .await?;
+            auth.finish_login(tokens).await
+        });
+        Ok(info)
+    }
+
+    fn spawn_login<F>(self: &Arc<Self>, login_id: String, login: F)
+    where
+        F: Future<Output = CoreResult<Account>> + Send + 'static,
+    {
+        let cancel = CancellationToken::new();
+        lock(&self.logins).insert(login_id.clone(), cancel.clone());
+        let auth = self.clone();
         tokio::spawn(async move {
             let status = tokio::select! {
-                result = auth.complete_login(&client_id, code) => match result {
+                result = login => match result {
                     Ok(account) => LoginStatus::Success { account },
                     Err(err) => {
                         tracing::warn!(error = %err, "microsoft login failed");
                         LoginStatus::Failed { kind: err.kind().to_string(), message: err.to_string() }
                     }
                 },
-                () = cancel.cancelled() => LoginStatus::Cancelled,
+                () = cancel.cancelled() => {
+                    tracing::info!("microsoft login cancelled");
+                    LoginStatus::Cancelled
+                }
             };
             lock(&auth.logins).remove(&login_id);
             (auth.listener)(LoginEvent { login_id, status });
         });
-        Ok(info)
     }
 
     pub fn cancel_login(&self, login_id: &str) {
@@ -177,7 +238,10 @@ impl MicrosoftAuth {
                 PollResult::Done(tokens) => break tokens,
             }
         };
+        self.finish_login(tokens).await
+    }
 
+    async fn finish_login(&self, tokens: oauth::TokenResponse) -> CoreResult<Account> {
         let authenticated = self.authenticate(tokens).await?;
         let account = self
             .accounts
@@ -690,6 +754,93 @@ mod tests {
         assert!(body.contains("name=\"variant\"\r\n\r\nslim\r\n"));
         assert!(body.contains("Content-Type: image/png\r\n\r\nPNG\r\n"));
         assert!(body.ends_with("--orrery-skin-upload-7f3a9c--\r\n"));
+    }
+
+    fn login_page() -> LoginPage {
+        LoginPage {
+            success: "done".into(),
+            failure: "failed".into(),
+        }
+    }
+
+    async fn follow_redirect(info: &BrowserLoginInfo, code: &str, state: Option<&str>) -> String {
+        let url = reqwest::Url::parse(&info.authorize_url).unwrap();
+        let query = |name: &str| {
+            url.query_pairs()
+                .find(|(key, _)| key == name)
+                .map(|(_, value)| value.into_owned())
+                .unwrap()
+        };
+        let redirect = query("redirect_uri").replace("localhost", "127.0.0.1");
+        let state = state.map_or_else(|| query("state"), str::to_string);
+        reqwest::get(format!("{redirect}/?code={code}&state={state}"))
+            .await
+            .unwrap()
+            .text()
+            .await
+            .unwrap()
+    }
+
+    #[tokio::test]
+    async fn browser_login_exchanges_the_code_with_pkce() {
+        let server = MockServer::start().await;
+        let xsts_ok = serde_json::json!({ "Token": "xsts-token", "DisplayClaims": { "xui": [{ "uhs": "hash" }] } });
+        mock_chain(&server, 200, xsts_ok).await;
+        Mock::given(method("POST"))
+            .and(path("/oauth/token"))
+            .and(body_string_contains("grant_type=authorization_code"))
+            .and(body_string_contains("code=browser-code"))
+            .and(body_string_contains("code_verifier="))
+            .and(body_string_contains(
+                "redirect_uri=http%3A%2F%2Flocalhost%3A",
+            ))
+            .respond_with(ResponseTemplate::new(200).set_body_json(serde_json::json!({
+                "access_token": "ms-access", "refresh_token": "refresh-browser"
+            })))
+            .expect(1)
+            .mount(&server)
+            .await;
+        let (auth, secrets, mut rx, _dir) = setup(&server).await;
+
+        let info = auth.begin_browser_login(login_page()).await.unwrap();
+        assert!(
+            info.authorize_url
+                .starts_with(&format!("{}/oauth/authorize?", server.uri()))
+        );
+        let page = follow_redirect(&info, "browser-code", None).await;
+        assert!(page.contains("done"), "{page}");
+
+        let event = tokio::time::timeout(Duration::from_secs(10), rx.recv())
+            .await
+            .unwrap()
+            .unwrap();
+        assert_eq!(event.login_id, info.login_id);
+        let LoginStatus::Success { account } = event.status else {
+            panic!("login failed: {:?}", event.status);
+        };
+        assert_eq!(account.username, "Alex");
+        assert_eq!(
+            secrets.get(&secret_key(&account.id)).unwrap().as_deref(),
+            Some("refresh-browser")
+        );
+        assert!(lock(&auth.logins).is_empty());
+    }
+
+    #[tokio::test]
+    async fn cancelled_browser_login_reports_cancelled() {
+        let server = MockServer::start().await;
+        let (auth, _secrets, mut rx, _dir) = setup(&server).await;
+
+        let info = auth.begin_browser_login(login_page()).await.unwrap();
+        let ignored = follow_redirect(&info, "x", Some("forged")).await;
+        assert!(!ignored.contains("done"));
+        auth.cancel_login(&info.login_id);
+        let event = tokio::time::timeout(Duration::from_secs(10), rx.recv())
+            .await
+            .unwrap()
+            .unwrap();
+        assert!(matches!(event.status, LoginStatus::Cancelled));
+        assert!(auth.accounts.view().await.accounts.is_empty());
     }
 
     #[tokio::test]

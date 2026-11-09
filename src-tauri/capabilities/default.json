@@ -33,6 +33,9 @@
                     "url": "https://login.live.com/oauth20_remoteconnect.srf*"
                 },
                 {
+                    "url": "https://login.microsoftonline.com/consumers/oauth2/v2.0/authorize?*"
+                },
+                {
                     "url": "https://github.com/nowaaak/orrery/releases*"
                 },
                 {

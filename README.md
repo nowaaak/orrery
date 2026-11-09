@@ -10,7 +10,7 @@ NOT AN OFFICIAL MINECRAFT PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH MOJANG OR 
 
 Playing requires a Microsoft account that owns Minecraft: Java Edition.
 
-- Sign-in uses Microsoft's device code flow: Orrery shows a code, and you enter it on Microsoft's own page at `microsoft.com/link`. Orrery never sees your password or verification codes.
+- Sign-in happens on Microsoft's own page in your default browser, where you choose which Microsoft account to use (authorization code flow with PKCE and a redirect to a temporary local port). If that does not work, Orrery can show a code to enter at `microsoft.com/link` instead. Orrery never sees your password or verification codes.
 - Orrery requests only the `XboxLive.signin` and `offline_access` scopes. The Microsoft refresh token is kept in the system keychain. The Minecraft access token is kept in memory only.
 - Every game start signs in again online: Xbox Live, XSTS, Minecraft services and Mojang's entitlement check, which must confirm that the account owns the game. The player name and UUID come from the verified profile. Without internet, or when the check fails, the game does not start.
 - Orrery has no offline accounts, no username-only profiles, no demo mode and no alternative authentication services. There is no development or testing switch that skips the sign-in.
@@ -23,7 +23,7 @@ Mojang has not yet approved Orrery's Azure app registration for Minecraft servic
 - Installs and launches every release and snapshot from Minecraft 1.8 onwards
 - Verifies every download (SHA-1, SHA-256 or SHA-512) and writes files atomically
 - Provides the matching Java runtime automatically (Mojang runtimes, Adoptium as fallback)
-- Microsoft accounts via device code login, with skin upload and a choice between the capes your Minecraft profile owns. Orrery offers no other capes
+- Microsoft accounts via browser sign-in with account selection, or a code as the fallback, with skin upload and a choice between the capes your Minecraft profile owns. Orrery offers no other capes
 - Microsoft refresh tokens live in the system keyring, never in JSON files
 - Fabric, Legacy Fabric and Quilt as mod loaders through their meta APIs, Forge and NeoForge through their official installers
 - Modrinth search and installation per instance for mods, resource packs and shaders, including required dependencies

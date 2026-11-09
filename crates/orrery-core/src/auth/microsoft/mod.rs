@@ -1,3 +1,4 @@
+mod loopback;
 mod minecraft;
 mod oauth;
 mod session;
@@ -6,7 +7,10 @@ mod xbox;
 use serde::Serialize;
 use ts_rs::TS;
 
-pub use session::{DeviceCodeInfo, LoginEvent, LoginListener, LoginStatus, MicrosoftAuth};
+pub use loopback::LoginPage;
+pub use session::{
+    BrowserLoginInfo, DeviceCodeInfo, LoginEvent, LoginListener, LoginStatus, MicrosoftAuth,
+};
 
 #[derive(Debug, Clone)]
 pub struct Endpoints {

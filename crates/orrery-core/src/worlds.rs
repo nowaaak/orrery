@@ -7,6 +7,7 @@ use std::time::{SystemTime, UNIX_EPOCH};
 use serde::Serialize;
 use ts_rs::TS;
 
+use crate::encoding::base64;
 use crate::error::IoResultExt;
 use crate::modpacks::validate_pack_path;
 use crate::nbt::{self, Tag};
@@ -23,7 +24,6 @@ const RESTORE_PREFIX: &str = ".orrery-restore-";
 const REPLACED_PREFIX: &str = ".orrery-replaced-";
 const MAX_LEVEL_BYTES: u64 = 64 * 1024 * 1024;
 const MAX_ICON_BYTES: u64 = 256 * 1024;
-const BASE64: &[u8; 64] = b"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, TS)]
 #[serde(rename_all = "snake_case")]
@@ -123,26 +123,6 @@ fn read_level(world_dir: &Path) -> Option<LevelInfo> {
 
 pub(crate) fn read_level_nbt(world_dir: &Path) -> Option<Tag> {
     nbt::read(&level_bytes(world_dir)?).map(|(_, root)| root)
-}
-
-fn base64(data: &[u8]) -> String {
-    let mut out = String::with_capacity(data.len().div_ceil(3) * 4);
-    for chunk in data.chunks(3) {
-        let b = [
-            chunk[0],
-            *chunk.get(1).unwrap_or(&0),
-            *chunk.get(2).unwrap_or(&0),
-        ];
-        let n = (u32::from(b[0]) << 16) | (u32::from(b[1]) << 8) | u32::from(b[2]);
-        for (i, shift) in [18, 12, 6, 0].into_iter().enumerate() {
-            if i <= chunk.len() {
-                out.push(char::from(BASE64[((n >> shift) & 63) as usize]));
-            } else {
-                out.push('=');
-            }
-        }
-    }
-    out
 }
 
 fn read_icon(world_dir: &Path) -> Option<String> {
@@ -633,15 +613,6 @@ mod tests {
         assert!(parse_level(&deep).is_none());
         let huge_list = [10, 0, 0, 9, 0, 1, b'l', 3, 0x7f, 0xff, 0xff, 0xff];
         assert!(parse_level(&huge_list).is_none());
-    }
-
-    #[test]
-    fn base64_matches_reference() {
-        assert_eq!(base64(b""), "");
-        assert_eq!(base64(b"f"), "Zg==");
-        assert_eq!(base64(b"fo"), "Zm8=");
-        assert_eq!(base64(b"foo"), "Zm9v");
-        assert_eq!(base64(b"foobar"), "Zm9vYmFy");
     }
 
     #[test]

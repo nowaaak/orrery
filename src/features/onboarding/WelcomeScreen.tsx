@@ -2,7 +2,7 @@ import { BoxesIcon, LogInIcon, PackageIcon, ShieldCheckIcon, SparklesIcon } from
 import { useCallback } from "react";
 import { OrreryLogo } from "@/components/brand/OrreryLogo";
 import { Button } from "@/components/ui/button";
-import { DeviceCodeDialog, useMicrosoftLogin } from "@/features/accounts/MicrosoftLoginCard";
+import { LoginDialog, useMicrosoftLogin } from "@/features/accounts/MicrosoftLoginCard";
 import { useSettings, useUpdateSettings } from "@/features/settings/useSettings";
 import { useT } from "@/i18n";
 import panorama from "../../../menupack/assets/minecraft/textures/gui/title/background/panorama_0.png";
@@ -91,9 +91,7 @@ export function WelcomeScreen() {
                     {text.withoutHint}
                 </p>
             </aside>
-            {login.device && (
-                <DeviceCodeDialog device={login.device} onClose={login.close} onSuccess={finish} />
-            )}
+            <LoginDialog login={login} onSuccess={finish} />
         </div>
     );
 }

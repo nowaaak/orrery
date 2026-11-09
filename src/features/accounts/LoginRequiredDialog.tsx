@@ -1,7 +1,6 @@
 import { LogInIcon } from "lucide-react";
-import { useCallback, useRef } from "react";
+import { useCallback } from "react";
 import { toast } from "sonner";
-import { cancelMicrosoftLogin } from "@/api/auth";
 import { errorMessage } from "@/api/invoke";
 import { launchInstance } from "@/api/launch";
 import { useUiStore } from "@/app/uiStore";
@@ -18,7 +17,7 @@ import {
 import { useInstances } from "@/features/instances/useInstances";
 import { getT, useT } from "@/i18n";
 import { create } from "zustand";
-import { DeviceCodePanel, useMicrosoftLogin } from "./MicrosoftLoginCard";
+import { LoginPanel, useMicrosoftLogin } from "./MicrosoftLoginCard";
 
 export type PendingLaunch = {
     instanceId: string;
@@ -38,7 +37,12 @@ export function LoginRequiredDialog() {
     const closeDialog = useUiStore((state) => state.closeDialog);
     return (
         <Dialog open={isOpen} onOpenChange={(next) => !next && closeDialog()}>
-            <DialogContent>{isOpen && <LoginRequired onDone={closeDialog} />}</DialogContent>
+            <DialogContent
+                onPointerDownOutside={(event) => event.preventDefault()}
+                onInteractOutside={(event) => event.preventDefault()}
+            >
+                {isOpen && <LoginRequired onDone={closeDialog} />}
+            </DialogContent>
         </Dialog>
     );
 }
@@ -49,7 +53,6 @@ function LoginRequired({ onDone }: { onDone: () => void }) {
     const pending = usePendingLaunch((state) => state.pending);
     const instances = useInstances();
     const login = useMicrosoftLogin();
-    const finished = useRef(false);
     const name = instances.data?.find((item) => item.id === pending?.instanceId)?.name;
 
     const resume = useCallback(
@@ -64,22 +67,8 @@ function LoginRequired({ onDone }: { onDone: () => void }) {
         [onDone, pending],
     );
 
-    if (login.device) {
-        const device = login.device;
-        return (
-            <DeviceCodePanel
-                device={device}
-                finished={finished}
-                onClose={() => {
-                    if (!finished.current) {
-                        void cancelMicrosoftLogin(device.loginId);
-                    }
-                    login.close();
-                }}
-                onDone={login.close}
-                onSuccess={resume}
-            />
-        );
+    if (login.pending) {
+        return <LoginPanel login={login} onSuccess={resume} />;
     }
 
     return (
@@ -99,10 +88,7 @@ function LoginRequired({ onDone }: { onDone: () => void }) {
                 </Button>
                 <Button
                     disabled={login.starting || !login.available}
-                    onClick={() => {
-                        finished.current = false;
-                        void login.start();
-                    }}
+                    onClick={() => void login.start()}
                 >
                     <LogInIcon data-icon="inline-start" />
                     {text.signIn}

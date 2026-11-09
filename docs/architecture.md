@@ -109,7 +109,7 @@ Every JSON file carries a `schema` field and is written atomically.
 
 ## Microsoft login
 
-1. Device code flow against `login.microsoftonline.com/consumers` with the scope `XboxLive.signin offline_access`.
+1. Authorization code flow with PKCE (S256) against `login.microsoftonline.com/consumers` with the scope `XboxLive.signin offline_access` and `prompt=select_account`, so Microsoft always shows its account picker. The system browser opens the authorization page. The redirect goes to `http://localhost:<port>`, where Orrery listens on a random port on `127.0.0.1` and, if possible, `[::1]`. Only a request to `/` with the expected `state` ends the wait. Other requests get a 404. The wait ends after 10 minutes. The Azure app needs `http://localhost` as a redirect URI for mobile and desktop applications. The device code flow (`microsoft.com/link`) stays as the fallback and needs public client flows enabled in the app registration.
 2. Xbox Live user token, then XSTS for `rp://api.minecraftservices.com/`.
 3. `login_with_xbox`, then `entitlements/license` must list `product_minecraft` or `game_minecraft`, otherwise the sign-in stops with `auth_no_minecraft_profile`.
 4. The Minecraft profile.

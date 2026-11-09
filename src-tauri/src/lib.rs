@@ -160,6 +160,7 @@ pub fn run() {
             commands::imports::inspect_optifine,
             commands::auth::microsoft_login_available,
             commands::auth::begin_microsoft_login,
+            commands::auth::begin_browser_login,
             commands::auth::cancel_microsoft_login,
             commands::updater::check_for_update,
             commands::updater::install_update,

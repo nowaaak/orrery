@@ -405,7 +405,7 @@ In November 2026 the NoRisk Client launcher (v0.6.29) was compared with Orrery t
 
 **Scope**
 
-- Microsoft sign-in in the system browser with PKCE and a loopback redirect, next to the device code
+- Microsoft sign-in in the system browser with PKCE and a loopback redirect, next to the device code (done and tested on Windows, tests on macOS and Linux are still open)
 - Download page on the website that detects the operating system and lists all files (done, the list is written into the site from the latest release when it is published)
 - Free code signing for open source projects on Windows through the SignPath Foundation, if Orrery meets its conditions (prepared: policy page and integration plan in [code-signing.md](code-signing.md), the application is up to the owner)
 

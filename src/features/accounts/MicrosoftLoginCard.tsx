@@ -1,9 +1,10 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { openUrl } from "@tauri-apps/plugin-opener";
-import { CopyIcon, ExternalLinkIcon, Loader2Icon, LogInIcon } from "lucide-react";
-import { type RefObject, useCallback, useEffect, useRef, useState } from "react";
+import { CopyIcon, ExternalLinkIcon, KeyRoundIcon, Loader2Icon, LogInIcon } from "lucide-react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 import {
+    beginBrowserLogin,
     beginMicrosoftLogin,
     cancelMicrosoftLogin,
     microsoftLoginAvailable,
@@ -12,6 +13,7 @@ import {
 import { friendlyMessage } from "@/api/errors";
 import { errorMessage } from "@/api/invoke";
 import type { Account } from "@/bindings/Account";
+import type { BrowserLoginInfo } from "@/bindings/BrowserLoginInfo";
 import type { DeviceCodeInfo } from "@/bindings/DeviceCodeInfo";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -26,30 +28,137 @@ import {
 import { getT, useT } from "@/i18n";
 import { accountsKey } from "./useAccounts";
 
+export type PendingLogin =
+    { kind: "browser"; info: BrowserLoginInfo } | { kind: "device"; info: DeviceCodeInfo };
+
+export type MicrosoftLogin = ReturnType<typeof useMicrosoftLogin>;
+
+async function openInBrowser(url: string) {
+    try {
+        await openUrl(url);
+    } catch (error) {
+        toast.error(getT().accounts.microsoft.openPageFailed, {
+            description: errorMessage(error),
+        });
+    }
+}
+
 export function useMicrosoftLogin() {
     const available = useQuery({
         queryKey: ["microsoft-login-available"],
         queryFn: microsoftLoginAvailable,
         staleTime: Infinity,
     });
-    const [device, setDevice] = useState<DeviceCodeInfo | null>(null);
+    const [pending, setPending] = useState<PendingLogin | null>(null);
     const [starting, setStarting] = useState(false);
-    const close = useCallback(() => setDevice(null), []);
+    const busy = useRef(false);
+    const close = useCallback(() => setPending(null), []);
 
-    const start = async () => {
+    const run = useCallback(async (begin: () => Promise<PendingLogin>) => {
+        if (busy.current) {
+            return;
+        }
+        busy.current = true;
         setStarting(true);
         try {
-            setDevice(await beginMicrosoftLogin());
+            setPending(await begin());
         } catch (error) {
             toast.error(getT().accounts.microsoft.startFailed, {
                 description: errorMessage(error),
             });
         } finally {
+            busy.current = false;
             setStarting(false);
         }
-    };
+    }, []);
 
-    return { available: available.data, device, starting, start, close };
+    const start = useCallback(
+        () =>
+            run(async () => {
+                const text = getT().accounts.microsoft;
+                const info = await beginBrowserLogin({
+                    success: text.pageSuccess,
+                    failure: text.pageFailure,
+                });
+                void openInBrowser(info.authorizeUrl);
+                return { kind: "browser", info };
+            }),
+        [run],
+    );
+
+    const startDeviceCode = useCallback(
+        () => run(async () => ({ kind: "device", info: await beginMicrosoftLogin() })),
+        [run],
+    );
+
+    return { available: available.data, pending, starting, start, startDeviceCode, close };
+}
+
+function useLoginResult(
+    loginId: string,
+    onDone: () => void,
+    onSuccess?: (account: Account) => void,
+) {
+    const queryClient = useQueryClient();
+    const callbacks = useRef({ onDone, onSuccess });
+    const mounted = useRef<string | null>(null);
+
+    useEffect(() => {
+        callbacks.current = { onDone, onSuccess };
+    }, [onDone, onSuccess]);
+
+    useEffect(() => {
+        mounted.current = loginId;
+        return () => {
+            mounted.current = null;
+            setTimeout(() => {
+                if (mounted.current !== loginId) {
+                    void cancelMicrosoftLogin(loginId);
+                }
+            }, 0);
+        };
+    }, [loginId]);
+
+    useEffect(() => {
+        let unlisten: (() => void) | undefined;
+        let disposed = false;
+        onLoginEvent((event) => {
+            if (event.loginId !== loginId) {
+                return;
+            }
+            switch (event.status.type) {
+                case "success":
+                    toast.success(
+                        getT().accounts.microsoft.signedInAs(event.status.account.username),
+                    );
+                    void queryClient.invalidateQueries({ queryKey: accountsKey });
+                    callbacks.current.onSuccess?.(event.status.account);
+                    break;
+                case "failed":
+                    toast.error(getT().accounts.microsoft.failed, {
+                        description: friendlyMessage(event.status.kind, event.status.message),
+                    });
+                    break;
+                case "cancelled":
+                    break;
+            }
+            callbacks.current.onDone();
+        }).then((fn) => {
+            if (disposed) {
+                fn();
+            } else {
+                unlisten = fn;
+            }
+        });
+        return () => {
+            disposed = true;
+            unlisten?.();
+        };
+    }, [loginId, queryClient]);
+}
+
+function keepOpen(event: Event) {
+    event.preventDefault();
 }
 
 export function MicrosoftLoginCard() {
@@ -77,100 +186,129 @@ export function MicrosoftLoginCard() {
                     </Button>
                 )}
             </CardContent>
-            {login.device && <DeviceCodeDialog device={login.device} onClose={login.close} />}
+            <LoginDialog login={login} />
         </Card>
     );
 }
 
-export function DeviceCodeDialog({
-    device,
-    onClose,
+export function LoginDialog({
+    login,
     onSuccess,
 }: {
-    device: DeviceCodeInfo;
-    onClose: () => void;
+    login: MicrosoftLogin;
     onSuccess?: (account: Account) => void;
 }) {
-    const finished = useRef(false);
-    const close = () => {
-        if (!finished.current) {
-            void cancelMicrosoftLogin(device.loginId);
-        }
-        onClose();
-    };
+    if (!login.pending) {
+        return null;
+    }
     return (
-        <Dialog open onOpenChange={(open) => !open && close()}>
-            <DialogContent>
-                <DeviceCodePanel
-                    device={device}
-                    finished={finished}
-                    onClose={close}
-                    onDone={onClose}
-                    onSuccess={onSuccess}
-                />
+        <Dialog open onOpenChange={(open) => !open && login.close()}>
+            <DialogContent onPointerDownOutside={keepOpen} onInteractOutside={keepOpen}>
+                <LoginPanel login={login} onSuccess={onSuccess} />
             </DialogContent>
         </Dialog>
     );
 }
 
-export function DeviceCodePanel({
-    device,
-    finished,
-    onClose,
-    onDone,
+export function LoginPanel({
+    login,
     onSuccess,
 }: {
-    device: DeviceCodeInfo;
-    finished: RefObject<boolean>;
+    login: MicrosoftLogin;
+    onSuccess?: (account: Account) => void;
+}) {
+    const pending = login.pending;
+    if (!pending) {
+        return null;
+    }
+    if (pending.kind === "browser") {
+        return (
+            <BrowserLoginPanel
+                key={pending.info.loginId}
+                info={pending.info}
+                switching={login.starting}
+                onUseCode={() => void login.startDeviceCode()}
+                onClose={login.close}
+                onSuccess={onSuccess}
+            />
+        );
+    }
+    return (
+        <DeviceCodePanel
+            key={pending.info.loginId}
+            device={pending.info}
+            onClose={login.close}
+            onSuccess={onSuccess}
+        />
+    );
+}
+
+function WaitingStatus() {
+    const t = useT();
+    return (
+        <p className="flex items-center gap-2 text-sm text-muted-foreground" role="status">
+            <Loader2Icon className="size-4 animate-spin motion-reduce:animate-none" aria-hidden />
+            {t.accounts.microsoft.waiting}
+        </p>
+    );
+}
+
+function BrowserLoginPanel({
+    info,
+    switching,
+    onUseCode,
+    onClose,
+    onSuccess,
+}: {
+    info: BrowserLoginInfo;
+    switching: boolean;
+    onUseCode: () => void;
     onClose: () => void;
-    onDone: () => void;
     onSuccess?: (account: Account) => void;
 }) {
     const t = useT();
-    const queryClient = useQueryClient();
-    const successRef = useRef(onSuccess);
+    const text = t.accounts.microsoft;
+    useLoginResult(info.loginId, onClose, onSuccess);
 
-    useEffect(() => {
-        successRef.current = onSuccess;
-    }, [onSuccess]);
+    return (
+        <>
+            <DialogHeader>
+                <DialogTitle>{text.browserTitle}</DialogTitle>
+                <DialogDescription className="text-pretty">
+                    {text.browserDescription}
+                </DialogDescription>
+            </DialogHeader>
+            <div className="flex flex-col items-center gap-3 py-2">
+                <WaitingStatus />
+                <Button variant="outline" onClick={() => void openInBrowser(info.authorizeUrl)}>
+                    <ExternalLinkIcon data-icon="inline-start" />
+                    {text.reopenBrowser}
+                </Button>
+            </div>
+            <DialogFooter className="sm:justify-between">
+                <Button variant="ghost" disabled={switching} onClick={onUseCode}>
+                    <KeyRoundIcon data-icon="inline-start" />
+                    {text.useCode}
+                </Button>
+                <Button variant="ghost" onClick={onClose}>
+                    {t.common.cancel}
+                </Button>
+            </DialogFooter>
+        </>
+    );
+}
 
-    useEffect(() => {
-        let unlisten: (() => void) | undefined;
-        let disposed = false;
-        onLoginEvent((event) => {
-            if (event.loginId !== device.loginId) {
-                return;
-            }
-            finished.current = true;
-            switch (event.status.type) {
-                case "success":
-                    toast.success(
-                        getT().accounts.microsoft.signedInAs(event.status.account.username),
-                    );
-                    void queryClient.invalidateQueries({ queryKey: accountsKey });
-                    successRef.current?.(event.status.account);
-                    break;
-                case "failed":
-                    toast.error(getT().accounts.microsoft.failed, {
-                        description: friendlyMessage(event.status.kind, event.status.message),
-                    });
-                    break;
-                case "cancelled":
-                    break;
-            }
-            onDone();
-        }).then((fn) => {
-            if (disposed) {
-                fn();
-            } else {
-                unlisten = fn;
-            }
-        });
-        return () => {
-            disposed = true;
-            unlisten?.();
-        };
-    }, [device.loginId, finished, onDone, queryClient]);
+function DeviceCodePanel({
+    device,
+    onClose,
+    onSuccess,
+}: {
+    device: DeviceCodeInfo;
+    onClose: () => void;
+    onSuccess?: (account: Account) => void;
+}) {
+    const t = useT();
+    useLoginResult(device.loginId, onClose, onSuccess);
 
     const copy = async () => {
         try {
@@ -221,13 +359,7 @@ export function DeviceCodePanel({
                         {device.verificationUri}
                     </span>
                 </p>
-                <p className="flex items-center gap-2 text-sm text-muted-foreground" role="status">
-                    <Loader2Icon
-                        className="size-4 animate-spin motion-reduce:animate-none"
-                        aria-hidden
-                    />
-                    {t.accounts.microsoft.waiting}
-                </p>
+                <WaitingStatus />
             </div>
             <DialogFooter>
                 <Button variant="ghost" onClick={onClose}>
