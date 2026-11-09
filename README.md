@@ -10,7 +10,7 @@ NOT AN OFFICIAL MINECRAFT PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH MOJANG OR 
 
 Playing requires a Microsoft account that owns Minecraft: Java Edition.
 
-- Sign-in happens on Microsoft's own page in your default browser, where you choose which Microsoft account to use (authorization code flow with PKCE and a redirect to a temporary local port). If that does not work, Orrery can show a code to enter at `microsoft.com/link` instead. Orrery never sees your password or verification codes.
+- Sign-in happens on Microsoft's own page in your default browser, where you choose which Microsoft account to use (authorization code flow with PKCE and a redirect to a temporary local port). If that does not work, Orrery can show a code to enter at `microsoft.com/link` instead. Orrery never sees your password, two-step codes or recovery details.
 - Orrery requests only the `XboxLive.signin` and `offline_access` scopes. The Microsoft refresh token is kept in the system keychain. The Minecraft access token is kept in memory only.
 - Every game start signs in again online: Xbox Live, XSTS, Minecraft services and Mojang's entitlement check, which must confirm that the account owns the game. The player name and UUID come from the verified profile. Without internet, or when the check fails, the game does not start.
 - Orrery has no offline accounts, no username-only profiles, no demo mode and no alternative authentication services. There is no development or testing switch that skips the sign-in.
@@ -28,7 +28,6 @@ Mojang has not yet approved Orrery's Azure app registration for Minecraft servic
 - Fabric, Legacy Fabric and Quilt as mod loaders through their meta APIs, Forge and NeoForge through their official installers
 - Modrinth search and installation per instance for mods, resource packs and shaders, including required dependencies
 - CurseForge search, installation, modpacks and updates in builds with a CurseForge API key. Files whose authors block third-party downloads are opened on CurseForge's website for you to download yourself
-- Orrery Shaders, a built-in shader pack for Iris with soft shadows, a starry sky and clear water
 - Orrery Menu, a built-in resource pack that gives the main menu a space panorama, own buttons and splash texts
 - One-click performance pack, hardware based game options and a dedicated GPU preference on Windows
 - Modrinth modpacks (`.mrpack`): install from Modrinth, import from a file and export an instance
@@ -107,7 +106,7 @@ Servers can switch any module off through the `orrery:policy` plugin channel. Th
 
 ## License
 
-Orrery, including Orrery Companion, Orrery Shaders and Orrery Menu, is licensed under the [GNU General Public License v3.0 only](LICENSE). Bundled third-party fonts keep their own licenses, for example `companion/src/main/resources/LICENSE-Inter.txt`.
+Orrery, including Orrery Companion and Orrery Menu, is licensed under the [GNU General Public License v3.0 only](LICENSE). Bundled third-party fonts keep their own licenses, for example `companion/src/main/resources/LICENSE-Inter.txt`.
 
 ## Contact
 

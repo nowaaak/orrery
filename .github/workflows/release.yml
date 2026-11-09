@@ -87,7 +87,7 @@ jobs:
 
             NOT AN OFFICIAL MINECRAFT PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH MOJANG OR MICROSOFT.
 
-            See CHANGELOG.md for all changes.
+            Changes in this version: https://github.com/nowaaak/orrery/blob/${{ github.ref_name }}/CHANGELOG.md
           releaseDraft: true
           prerelease: false
           args: ${{ matrix.args }}

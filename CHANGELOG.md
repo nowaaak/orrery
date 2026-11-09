@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased
+
+- Orrery Shaders are removed. Instances that already have the pack keep it as an ordinary shader pack, and Orrery no longer updates it
+- Waypoints, the automatic death point and the compass bar switch off in worlds and on servers that hide coordinates through reduced debug info
+- The Realms button on the Orrery title screen follows the same multiplayer restrictions as the vanilla menu, and the continue button never remembers a Realm on 1.20.1
+- Zoom stops at the strength of the spyglass
+- Instance settings reject JVM arguments, environment variables, wrapper commands and game arguments that would change how the game signs in, for example authlib-injector, `-Dminecraft.api.*` or `--username`. Orrery checks them again before every start
+- The privacy page describes the sign-in in the browser and the local listener it uses
+
 ## 0.5.1
 
 - The welcome screen with the sign-in appears on every start while no account is signed in. Continuing without an account only skips it until Orrery is closed
@@ -20,7 +29,6 @@
 - CurseForge as a second source in builds with a CurseForge API key: search and install mods, resource packs and shaders with their dependencies, install CurseForge modpacks from the modpack dialog, from a file or by dropping the zip, export an instance as a CurseForge zip, and get updates for CurseForge content
 - Modpack exports also contain the `scripts`, `resources` and `structures` folders, so packs with CraftTweaker scripts or custom resources stay complete
 - Files whose authors block downloads through other apps are taken from Modrinth when the same file is there. Otherwise the content tab lists them with a link to the download page and picks them up from the downloads folder as soon as they are downloaded
-
 - The website offers the matching download for your system first and lists every installer of the latest release
 - Sync packs: one list of mods, resource packs and shaders that several instances subscribe to. Orrery installs the matching version in each instance, skips what does not exist for it, removes what the pack no longer contains and leaves content you installed yourself alone. Single projects can be switched off per instance
 - Native libraries that went missing, for example removed by a virus scanner, are unpacked again on the next start instead of crashing the game
@@ -40,17 +48,19 @@
 
 ## 0.3.0
 
+Releases up to 0.3.0 were withdrawn. 0.4.0 is the oldest release that can be downloaded.
+
 - Orrery is now licensed under the GNU General Public License v3.0
 - Offline accounts are removed. Every game start needs a Microsoft account that owns Minecraft: Java Edition, as Mojang requires for launchers that use its services. Offline accounts saved earlier disappear from the list
 - About Orrery shows a link to the privacy page and the notice that Orrery is not an official Minecraft product
 - Emotes in the companion: wave, cheer, clap, dance and point on the N key, visible to you only
-- Cosmetics on the skin page: top hat, crown, beanie, halo, backpack, feather and bat wings with an own color, plus an own cape image. The 3D preview shows them right away, and Microsoft accounts can store head and back item invisibly in the skin so that other Orrery players see them. The companion draws them in the game for every player, and the own cape replaces the cape of your own player
+- Cosmetics on the skin page: top hat, crown, beanie, halo, backpack, feather and bat wings with an own color, plus an own cape image. The 3D preview shows them right away, and Microsoft accounts can store head and back item invisibly in the skin so that other Orrery players see them. The companion draws them in the game for every player, and the own cape replaces the cape of your own player. Removed in 0.4.0
 - Orrery Companion: Orrery's own mod for Fabric and Quilt on 1.20.1, 1.21.11 and 26.3. It connects the game to the launcher, opens the Orrery menu on right Shift and respects servers that switch its modules off. It can be switched off per instance and never ends up in exported modpacks
 - The companion feeds the launcher while you play: Discord shows world or server together with the dimension, the instance page shows where you are, the servers tab counts playtime per server, new screenshots appear in the gallery right away and launcher tasks that finish while you play show up as toasts in the game
-- Waypoints with a compass bar, automatic death point and auto reconnect after a disconnect
+- Waypoints with a compass bar, automatic death point and auto reconnect after a disconnect. Auto reconnect was removed in 0.4.0
 - Chat timestamps, stacking of repeated messages, a longer history and a chat history screen that copies messages
 - Crosshair editor with live preview, low fire and hand position as companion modules
-- Zoom, freelook, fullbright and auto sprint as companion modules
+- Zoom, freelook, fullbright and auto sprint as companion modules. Freelook, fullbright and auto sprint were removed in 0.4.0
 - More HUD modules: keystrokes with clicks per second, CPS, armor and item durability, status effects
 - Orrery modules in the companion: FPS, coordinates with biome and facing, clock, memory, server and ping as HUD boxes. Every module is off by default, can be switched off by servers and is placed with a HUD editor (drag and drop, snapping, mouse wheel scaling)
 - New Orrery title screen in the companion, replacing the vanilla one: own background with slow motion, glass tiles with icons, Inter as font, greeting, continue card and a More popover for Realms, language and accessibility. The classic menu stays one click away
@@ -73,7 +83,7 @@
 - Game log with search, filter for warnings and errors and a follow switch. Share a log through mclo.gs after a preview without credentials, IP addresses or names
 - Launcher log viewer in Settings and in the command palette
 - Orrery Menu: the Minecraft main menu in the Orrery look with a space panorama, own buttons, backgrounds and splash texts. One click in the resource packs tab, works on every version from 1.8 and without mods
-- Orrery Shaders: Orrery's own shader pack with soft shadows, volumetric clouds, light rays, reflective water with caustics, a starry night sky with nebula and aurora, waving plants and temporal anti-aliasing. One click in the Shaders tab installs Iris if needed and activates the pack with settings that fit your PC
+- Orrery Shaders: Orrery's own shader pack with soft shadows, volumetric clouds, light rays, reflective water with caustics, a starry night sky with nebula and aurora, waving plants and temporal anti-aliasing. One click in the Shaders tab installs Iris if needed and activates the pack with settings that fit your PC. Removed in 0.5.2
 
 ## 0.2.1
 

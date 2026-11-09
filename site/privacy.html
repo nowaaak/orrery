@@ -40,7 +40,7 @@
 
         <main id="main" class="wrap page">
             <h1>Privacy</h1>
-            <p class="updated">Last updated: 6 November 2026</p>
+            <p class="updated">Last updated: 9 November 2026</p>
 
             <p>
                 Orrery is a desktop application that runs on your computer. It has no server, no
@@ -176,9 +176,19 @@
 
             <h2>Local connections</h2>
             <p>
-                Discord Rich Presence talks only to the Discord app on your own computer and can be
-                switched off in the settings. The optional Orrery Companion mod connects to the
-                launcher over <code>127.0.0.1</code> and never leaves your computer.
+                To sign in, Orrery opens Microsoft's sign-in page in your default browser. While you
+                sign in there, Orrery listens on a random port on <code>127.0.0.1</code> (and
+                <code>::1</code> where available) so that Microsoft can hand the one-time sign-in
+                code back to it. The listener only accepts that answer and closes after the sign-in
+                or after 10 minutes. If you use the code at <code>microsoft.com/link</code> instead,
+                nothing listens.
+            </p>
+            <p>
+                The optional Orrery Companion mod connects to the launcher over
+                <code>127.0.0.1</code> and never leaves your computer. Discord Rich Presence only
+                exists in builds that include a Discord application id. The official releases do not
+                include one. In such a build it talks only to the Discord app on your own computer
+                and can be switched off in the settings.
             </p>
 
             <h2>Children</h2>

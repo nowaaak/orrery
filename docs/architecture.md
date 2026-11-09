@@ -18,7 +18,7 @@ Keeping the core free of Tauri makes it testable without a window. Paths, the HT
 | ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `services`                            | Wires all stores together and contains the install and launch flow. Tauri state is `Services`.                                                                                                   |
 | `net`                                 | HTTP client with retries and the parallel downloader. Downloads stream into a temporary sibling file, hash while writing, check the size and rename atomically.                                  |
-| `minecraft::manifest`                 | Version manifest with a 15 minute cache and offline fallback, version JSON download with SHA-1 check, `inheritsFrom` resolution.                                                                 |
+| `minecraft::manifest`                 | Version manifest with a 15 minute cache that falls back to the cached copy when the download fails, version JSON download with SHA-1 check, `inheritsFrom` resolution.                           |
 | `minecraft::version`                  | Version JSON model for both argument formats and the merge of child versions such as Fabric profiles.                                                                                            |
 | `minecraft::rules`                    | OS, architecture and feature rules.                                                                                                                                                              |
 | `minecraft::libraries`                | Classpath, legacy natives with `${arch}` classifiers and modern per-architecture natives.                                                                                                        |
@@ -45,7 +45,6 @@ Keeping the core free of Tauri makes it testable without a window. Paths, the HT
 | `instances`                           | Instance CRUD, immutable slugs, duplication and the per-instance `mods.json` index.                                                                                                              |
 | `tuning`                              | Memory and JVM flag recommendation from system RAM (sysinfo), version, loader, mod count and shaders.                                                                                            |
 | `minecraft::crash`                    | Finds new crash reports or JVM error files after an unexpected exit and classifies the likely cause.                                                                                             |
-| `shaderpack`                          | Embeds `shaderpack/` at build time, builds a deterministic zip, installs it with Iris, selects it in `iris.properties` and writes profile options per hardware tier.                             |
 | `menupack`                            | Embeds `menupack/`, writes `pack.mcmeta` per instance version, selects the pack in `options.txt` and rebuilds it before launch.                                                                  |
 | `extras`                              | Instance folders, log export, update checks through Modrinth hashes and CurseForge file indexes, and batch updates.                                                                              |
 | `nbt`                                 | Reader and writer for uncompressed NBT with Java's modified UTF-8. Compounds keep their order, so files round-trip byte for byte.                                                                |
@@ -86,7 +85,7 @@ Configuration always lives in Tauri's `app_local_data_dir` (local, not roaming):
 
 <root>/                   data root, the config folder unless dataDir is set
   orrery-data.json        marker, only in a custom data folder
-  meta/                   manifests and version JSONs, needed for offline starts
+  meta/                   cached manifests and version JSONs
   libraries/              shared Maven layout
   assets/                 indexes, objects, log configs
   versions/<id>/<id>.jar  client jars
@@ -119,6 +118,8 @@ The refresh token is stored in the system keyring (Windows Credential Manager, m
 New Azure app registrations must be approved by Mojang before `api.minecraftservices.com` accepts them. Until then the login ends with `auth_app_not_approved`.
 
 Orrery has no offline accounts, no username-only profiles, no demo mode and no alternative authentication servers. There is no build flag or development switch that skips the sign-in or the ownership check.
+
+Instance settings cannot point the game at another authentication server or replace its session. JVM arguments, the variables `JAVA_TOOL_OPTIONS`, `_JAVA_OPTIONS` and `JDK_JAVA_OPTIONS` and the wrapper command are rejected when they mention authlib, yggdrasil or `-Dminecraft.api.`. Extra game arguments cannot set `--username`, `--uuid`, `--accessToken`, `--session`, `--userType`, `--xuid`, `--clientId`, `--userProperties`, `--profileProperties` or `--demo`. Orrery checks this when the settings are saved and again before every start, so an edited `instance.json` does not get around it.
 
 ## Security notes
 
