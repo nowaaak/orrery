@@ -4,6 +4,7 @@ import { OrreryLogo } from "@/components/brand/OrreryLogo";
 import { Button } from "@/components/ui/button";
 import { LoginDialog, useMicrosoftLogin } from "@/features/accounts/MicrosoftLoginCard";
 import { useSettings, useUpdateSettings } from "@/features/settings/useSettings";
+import { UpdateNotice } from "@/features/updater/UpdateNotice";
 import { useT } from "@/i18n";
 import panorama from "../../../menupack/assets/minecraft/textures/gui/title/background/panorama_0.png";
 
@@ -90,6 +91,7 @@ export function WelcomeScreen() {
                 <p className="border-t pt-4 text-center text-xs text-pretty text-muted-foreground">
                     {text.withoutHint}
                 </p>
+                <UpdateNotice />
             </aside>
             <LoginDialog login={login} onSuccess={finish} />
         </div>
