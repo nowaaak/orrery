@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.5.0
+
+- Sign-in through the browser: Orrery opens Microsoft's own page in your default browser, where you choose which Microsoft account to use. Signing in with a code on `microsoft.com/link` stays available as a fallback
+- Clicking next to the sign-in dialog no longer cancels the sign-in
+- The welcome screen shows when a launcher update is available and installs it
+- The website has a new design
+
 ## 0.4.0
 
 - Cosmetics are removed: hats, wings, the own cape image and the cosmetics stored in skins. Orrery only offers the capes your Minecraft profile owns. Emotes stay
