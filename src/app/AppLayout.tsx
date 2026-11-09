@@ -12,11 +12,11 @@ import { OptifineDialog } from "@/features/optifine/OptifineDialog";
 import { CommandPalette, PaletteButton } from "@/features/palette/CommandPalette";
 import { NAV_ITEMS } from "./navigation";
 import { TitleBar } from "./TitleBar";
+import { useUiStore } from "./uiStore";
 import { AccountSwitcher } from "@/features/accounts/AccountSwitcher";
 import { LoginRequiredDialog } from "@/features/accounts/LoginRequiredDialog";
 import { useAccounts } from "@/features/accounts/useAccounts";
 import { WelcomeScreen } from "@/features/onboarding/WelcomeScreen";
-import { useSettings } from "@/features/settings/useSettings";
 import { useGameSync } from "@/features/launch/useGameSync";
 import { cn } from "@/lib/utils";
 import { TaskTray } from "@/features/tasks/TaskTray";
@@ -26,9 +26,9 @@ import { useT } from "@/i18n";
 export function AppLayout() {
     useGameSync();
     const t = useT();
-    const settings = useSettings();
     const accounts = useAccounts();
-    const welcome = settings.data?.welcomeDone === false && accounts.data?.accounts.length === 0;
+    const welcomeDismissed = useUiStore((state) => state.welcomeDismissed);
+    const welcome = !welcomeDismissed && accounts.data?.accounts.length === 0;
     const { pathname } = useLocation();
     const scrollRef = useRef<HTMLDivElement>(null);
 

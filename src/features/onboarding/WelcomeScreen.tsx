@@ -1,9 +1,8 @@
 import { BoxesIcon, LogInIcon, PackageIcon, ShieldCheckIcon, SparklesIcon } from "lucide-react";
-import { useCallback } from "react";
+import { useUiStore } from "@/app/uiStore";
 import { OrreryLogo } from "@/components/brand/OrreryLogo";
 import { Button } from "@/components/ui/button";
 import { LoginDialog, useMicrosoftLogin } from "@/features/accounts/MicrosoftLoginCard";
-import { useSettings, useUpdateSettings } from "@/features/settings/useSettings";
 import { UpdateNotice } from "@/features/updater/UpdateNotice";
 import { useT } from "@/i18n";
 import panorama from "../../../menupack/assets/minecraft/textures/gui/title/background/panorama_0.png";
@@ -11,15 +10,9 @@ import panorama from "../../../menupack/assets/minecraft/textures/gui/title/back
 export function WelcomeScreen() {
     const t = useT();
     const text = t.onboarding;
-    const settings = useSettings();
-    const update = useUpdateSettings();
     const login = useMicrosoftLogin();
 
-    const finish = useCallback(() => {
-        if (settings.data) {
-            update.mutate({ ...settings.data, welcomeDone: true });
-        }
-    }, [settings.data, update]);
+    const dismiss = useUiStore((state) => state.dismissWelcome);
 
     const features = [
         { icon: BoxesIcon, label: text.features.loaders },
@@ -81,7 +74,7 @@ export function WelcomeScreen() {
                         <LogInIcon data-icon="inline-start" />
                         {text.signIn}
                     </Button>
-                    <Button variant="ghost" size="lg" disabled={update.isPending} onClick={finish}>
+                    <Button variant="ghost" size="lg" onClick={dismiss}>
                         {text.continueWithout}
                     </Button>
                 </div>
@@ -93,7 +86,7 @@ export function WelcomeScreen() {
                 </p>
                 <UpdateNotice />
             </aside>
-            <LoginDialog login={login} onSuccess={finish} />
+            <LoginDialog login={login} onSuccess={dismiss} />
         </div>
     );
 }

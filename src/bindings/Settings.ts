@@ -5,4 +5,4 @@ import type { LauncherWindow } from "./LauncherWindow";
 import type { PresenceLevel } from "./PresenceLevel";
 import type { Theme } from "./Theme";
 
-export type Settings = { schema: number, maxConcurrentDownloads: number, defaultMinMemoryMb: number, defaultMaxMemoryMb: number, showSnapshots: boolean, theme: Theme, language: Language, optimizeGameOptions: boolean, preferDedicatedGpu: boolean, launcherWindow: LauncherWindow, instanceSort: InstanceSort, discordPresence: PresenceLevel, welcomeDone: boolean, trashDays: number, dataDir: string | null, };
+export type Settings = { schema: number, maxConcurrentDownloads: number, defaultMinMemoryMb: number, defaultMaxMemoryMb: number, showSnapshots: boolean, theme: Theme, language: Language, optimizeGameOptions: boolean, preferDedicatedGpu: boolean, launcherWindow: LauncherWindow, instanceSort: InstanceSort, discordPresence: PresenceLevel, trashDays: number, dataDir: string | null, };

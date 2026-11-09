@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- The welcome screen with the sign-in appears on every start while no account is signed in. Continuing without an account only skips it until Orrery is closed
+
 ## 0.5.0
 
 - Sign-in through the browser: Orrery opens Microsoft's own page in your default browser, where you choose which Microsoft account to use. Signing in with a code on `microsoft.com/link` stays available as a fallback

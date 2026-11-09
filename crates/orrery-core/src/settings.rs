@@ -63,7 +63,6 @@ pub struct Settings {
     pub launcher_window: LauncherWindow,
     pub instance_sort: InstanceSort,
     pub discord_presence: PresenceLevel,
-    pub welcome_done: bool,
     pub trash_days: u32,
     #[ts(type = "string | null")]
     pub data_dir: Option<PathBuf>,
@@ -84,7 +83,6 @@ impl Default for Settings {
             launcher_window: LauncherWindow::KeepOpen,
             instance_sort: InstanceSort::LastPlayed,
             discord_presence: PresenceLevel::Basic,
-            welcome_done: false,
             trash_days: 14,
             data_dir: None,
         }
@@ -245,5 +243,15 @@ mod tests {
             serde_json::from_str(r#"{"schema":1,"showSnapshots":true}"#).unwrap();
         assert!(parsed.show_snapshots);
         assert_eq!(parsed.max_concurrent_downloads, 16);
+    }
+
+    #[test]
+    fn removed_fields_from_older_versions_are_ignored() {
+        let parsed: Settings = serde_json::from_str(
+            r#"{"schema":2,"welcomeDone":true,"trashDays":30,"showSnapshots":true}"#,
+        )
+        .unwrap();
+        assert!(parsed.show_snapshots);
+        assert_eq!(parsed.trash_days, 30);
     }
 }

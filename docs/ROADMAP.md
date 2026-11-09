@@ -366,14 +366,14 @@ In November 2026 the NoRisk Client launcher (v0.6.29) was compared with Orrery t
 
 **Scope**
 
-- Welcome screen (done) on the first start without an account: sign in with Microsoft or look around first. Without an account the player can create instances and install content, but not start the game
+- Welcome screen (done) on every start without an account: sign in with Microsoft or look around first until Orrery is closed. Without an account the player can create instances and install content, but not start the game
 - Pressing play without an account opens the sign-in and continues the launch afterwards (done)
 - Trash (done): deleted instances and worlds are moved to a trash folder in the data folder, can be restored from settings and are removed after a configurable time (default 14 days) or on request
 - Pin a mod (done): excluded from update checks and from updating all, shown with a pin mark
 - Network outages: dropped. Every game start signs in again online and checks game ownership, so the game does not start without internet
 - Licenses page in About (done): all third-party Rust crates and npm packages with their license texts, collected at build time by an own script from `cargo metadata` and `node_modules`, without a new dependency
 
-**Done when:** a new data folder shows the welcome screen once, a launch without an account resumes after signing in, a deleted instance comes back with all its files, a pinned mod is skipped by updating all, and the licenses page lists every shipped dependency.
+**Done when:** every start without an account shows the welcome screen, a launch without an account resumes after signing in, a deleted instance comes back with all its files, a pinned mod is skipped by updating all, and the licenses page lists every shipped dependency.
 
 **Depends on:** nothing.
 
