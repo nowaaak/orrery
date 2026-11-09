@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.5.2
 
 - Orrery Shaders are removed. Instances that already have the pack keep it as an ordinary shader pack, and Orrery no longer updates it
 - Waypoints, the automatic death point and the compass bar switch off in worlds and on servers that hide coordinates through reduced debug info
