@@ -19,7 +19,6 @@ use orrery_core::optifine;
 use orrery_core::paths::LauncherPaths;
 use orrery_core::platform::Platform;
 use orrery_core::progress::Progress;
-use orrery_core::shaderpack::{self, Activation};
 use orrery_core::worlds;
 
 #[tokio::main]
@@ -312,12 +311,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             );
         }
     }
-    if flags.iter().any(|f| f == "--orrery-shaders") {
-        let mods = ModsDir::new(root.join("game"), &game_dir);
-        let entry =
-            shaderpack::install_bundled(&mods, Activation::Select, HardwareTier::Medium).await?;
-        println!("installed {} ({})", entry.title, entry.file_name);
-    }
     if flags.iter().any(|f| f == "--orrery-menu") {
         let mods = ModsDir::new(root.join("game"), &game_dir);
         let target = menupack::GameTarget {
@@ -325,7 +318,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             client_jar: paths.client_jar(&game_version),
             optimize_options: false,
         };
-        let entry = menupack::install_bundled(&mods, &target, Activation::Select).await?;
+        let entry = menupack::install_bundled(&mods, &target, menupack::Activation::Select).await?;
         println!("installed {} ({})", entry.title, entry.file_name);
     }
     println!("game folder prepared in {}", game_dir.display());

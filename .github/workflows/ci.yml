@@ -71,8 +71,3 @@ jobs:
       - name: Check generated TypeScript bindings are committed
         run: git diff --exit-code -- src/bindings
         shell: bash
-      - name: Compile the Orrery shader pack
-        if: runner.os == 'Linux'
-        run: |
-          sudo apt-get install -y glslang-tools
-          cargo run --example shader_check

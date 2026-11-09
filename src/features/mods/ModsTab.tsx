@@ -43,7 +43,6 @@ import { getT, useT } from "@/i18n";
 import { ModIcon } from "./ModIcon";
 import {
     ORRERY_MENU,
-    ORRERY_SHADERS,
     OrreryBundledCard,
     installBundleWithToast,
     orreryBundle,
@@ -89,9 +88,6 @@ export function ModsTab({ instance }: { instance: Instance }) {
             </div>
             <PendingDownloadsCard instanceId={instance.id} />
             <InstanceSyncCard instance={instance} />
-            {kind === "shader" && (
-                <OrreryBundledCard bundle={ORRERY_SHADERS} instanceId={instance.id} />
-            )}
             {kind === "resource_pack" && (
                 <OrreryBundledCard bundle={ORRERY_MENU} instanceId={instance.id} />
             )}

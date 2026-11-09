@@ -1,6 +1,6 @@
 # Orrery Menu
 
-Orrery ships its own resource pack for the Minecraft main menu. The source lives in `menupack/` and is embedded into the launcher at build time, like the Orrery Shaders. It changes how the menu looks, not its layout. The companion mod adds a continue button, an Orrery button and the active account to the title screen, see [companion.md](companion.md).
+Orrery ships its own resource pack for the Minecraft main menu. The source lives in `menupack/` and is embedded into the launcher at build time. It changes how the menu looks, not its layout. The companion mod adds a continue button, an Orrery button and the active account to the title screen, see [companion.md](companion.md).
 
 ## Content
 

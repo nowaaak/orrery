@@ -156,14 +156,6 @@ pub async fn scan_optifine_packs(
 }
 
 #[tauri::command]
-pub async fn install_orrery_shaders(
-    state: State<'_, AppState>,
-    instance_id: String,
-) -> CommandResult<TaskId> {
-    Ok(state.install_orrery_shaders(&instance_id).await?)
-}
-
-#[tauri::command]
 pub async fn install_orrery_menu(
     state: State<'_, AppState>,
     instance_id: String,

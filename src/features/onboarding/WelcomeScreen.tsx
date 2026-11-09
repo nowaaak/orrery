@@ -17,7 +17,7 @@ export function WelcomeScreen() {
     const features = [
         { icon: BoxesIcon, label: text.features.loaders },
         { icon: PackageIcon, label: text.features.content },
-        { icon: SparklesIcon, label: text.features.shaders },
+        { icon: SparklesIcon, label: text.features.menu },
         { icon: ShieldCheckIcon, label: text.features.privacy },
     ];
 

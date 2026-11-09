@@ -1,11 +1,11 @@
 export const de = {
     headline: "Ein unabhängiger Launcher für Minecraft: Java Edition.",
     tagline:
-        "Instanzen, Mods und Modpacks, eigene Shader und ein eigenes Menü. Ohne Server von Orrery, ohne Werbung, Open Source.",
+        "Instanzen, Mods, Modpacks und ein eigenes Menü. Ohne Server von Orrery, ohne Werbung, Open Source.",
     features: {
         loaders: "Fabric, Quilt, Forge und NeoForge",
         content: "Mods von Modrinth mit einem Klick",
-        shaders: "Orrery Shaders eingebaut",
+        menu: "Eigenes Hauptmenü eingebaut",
         privacy: "Keine Telemetrie, kein Konto bei uns",
     },
     welcome: "Willkommen",
@@ -25,12 +25,11 @@ export const de = {
 
 export const en: typeof de = {
     headline: "An independent launcher for Minecraft: Java Edition.",
-    tagline:
-        "Instances, mods and modpacks, an own shader pack and an own menu. No Orrery servers, no ads, open source.",
+    tagline: "Instances, mods, modpacks and an own menu. No Orrery servers, no ads, open source.",
     features: {
         loaders: "Fabric, Quilt, Forge and NeoForge",
         content: "Mods from Modrinth in one click",
-        shaders: "Orrery Shaders built in",
+        menu: "Own main menu built in",
         privacy: "No telemetry, no account with us",
     },
     welcome: "Welcome",

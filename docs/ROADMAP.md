@@ -27,7 +27,7 @@
 | M22       | Crash assistant with fixes and mod bisect                                                          | Planned, phase D                   |
 | M23       | Play with friends                                                                                  | Planned, phase D                   |
 | M24       | Polish, accessibility, CLI and automation                                                          | Planned, phase D                   |
-| M25       | Orrery Shaders, an own shader pack for Iris built into the launcher                                | Stage 2 done, prioritized          |
+| M25       | Orrery Shaders, an own shader pack for Iris built into the launcher                                | Removed                            |
 | M26       | Orrery Menu, an own main menu design built into the launcher                                       | Stages 1 and 2 done, prioritized   |
 | M27       | First run, data safety and licenses                                                                | Done                               |
 | M28       | Sync packs                                                                                         | Stage 1 done, untested in the app  |
@@ -419,20 +419,7 @@ In November 2026 the NoRisk Client launcher (v0.6.29) was compared with Orrery t
 
 #### M25 Orrery Shaders
 
-**Goal:** An own shader pack with Orrery's space look, shipped inside the launcher and activated with one click.
-
-**Scope**
-
-- Stage 1 (done): pack source in `shaderpack/`, embedded at build time, one-click install with Iris, activation in `iris.properties`, profile per hardware tier, update detection, shadows, lighting, sky with stars, water, fog, tone mapping, options menu in English and German
-- Stage 2 (done): deferred pipeline, ambient occlusion, volumetric clouds and light rays, water refraction, reflections and caustics, temporal anti-aliasing, bloom, waving foliage, translucent leaves, wet surfaces, nebula, aurora and a galaxy sky in the End
-- Stage 3: colored shadows through stained glass, labPBR resource pack support, rain puddles, better Nether and End atmospheres, an own sun and moon
-- Details in [shaderpack.md](shaderpack.md)
-
-**Done when:** the pack compiles in CI, loads without errors on 1.20.1 and the latest release, and day, dusk, night, water, Nether and End look right in game.
-
-**Depends on:** nothing.
-
-**Risks:** Iris changes between versions. Older Iris builds may lack `hasSkylight`, so 1.20.1 is checked in game before stage 2.
+**Status:** removed in 0.5.2. An own shader pack for Iris was built and shipped inside the launcher. It is not part of Orrery any more. Instances that already have it keep the file as an ordinary shader pack, and Orrery no longer updates it.
 
 #### M26 Orrery Menu
 

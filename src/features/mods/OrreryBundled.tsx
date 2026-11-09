@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { toast } from "sonner";
 import { errorMessage } from "@/api/invoke";
-import { installOrreryMenu, installOrreryShaders } from "@/api/mods";
+import { installOrreryMenu } from "@/api/mods";
 import { OrreryLogo } from "@/components/brand/OrreryLogo";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -21,13 +21,6 @@ type OrreryBundle = {
     text: (t: Messages) => BundledText;
 };
 
-export const ORRERY_SHADERS: OrreryBundle = {
-    id: "orrery-shaders",
-    title: "Orrery Shaders",
-    install: installOrreryShaders,
-    text: (t) => t.content.orreryShaders,
-};
-
 export const ORRERY_MENU: OrreryBundle = {
     id: "orrery-menu",
     title: "Orrery Menu",
@@ -36,7 +29,7 @@ export const ORRERY_MENU: OrreryBundle = {
 };
 
 export function orreryBundle(projectId: string): OrreryBundle | undefined {
-    return [ORRERY_SHADERS, ORRERY_MENU].find((bundle) => bundle.id === projectId);
+    return [ORRERY_MENU].find((bundle) => bundle.id === projectId);
 }
 
 export async function installBundleWithToast(bundle: OrreryBundle, instanceId: string) {

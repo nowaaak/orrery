@@ -5,12 +5,6 @@ fn main() {
     let manifest_dir = PathBuf::from(std::env::var("CARGO_MANIFEST_DIR").expect("manifest dir"));
     let repo = manifest_dir.join("..").join("..");
     embed(
-        &repo.join("shaderpack"),
-        &["shaders"],
-        "shaders/shaders.properties",
-        "shaderpack_files.rs",
-    );
-    embed(
         &repo.join("menupack"),
         &["assets", "pack.png"],
         "assets/minecraft/texts/splashes.txt",

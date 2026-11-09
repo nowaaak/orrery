@@ -34,7 +34,6 @@ pub mod screenshots;
 pub mod servers;
 pub mod services;
 pub mod settings;
-pub mod shaderpack;
 pub mod skins;
 pub mod storage;
 pub mod syncpacks;

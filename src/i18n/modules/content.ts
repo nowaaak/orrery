@@ -33,12 +33,6 @@ export const de = {
     irisHintAfter: ". Ohne sie werden Shader im Spiel nicht angezeigt.",
     installIris: "Iris installieren",
     installIrisFailed: "Iris konnte nicht installiert werden",
-    orreryShaders: {
-        description:
-            "Der eigene Shader von Orrery: Sternenhimmel, weiche Schatten und klares Wasser. Iris wird bei Bedarf mitinstalliert.",
-        install: "Installieren und aktivieren",
-        failed: "Orrery Shaders konnten nicht installiert werden",
-    },
     orreryMenu: {
         description:
             "Das eigene Hauptmenü von Orrery: Weltraum-Panorama, Buttons und Hintergründe im Orrery-Look. Läuft auch ohne Mods.",
@@ -199,12 +193,6 @@ export const en: typeof de = {
     irisHintAfter: " mod. Without it, shaders are not shown in the game.",
     installIris: "Install Iris",
     installIrisFailed: "Could not install Iris",
-    orreryShaders: {
-        description:
-            "Orrery's own shader: starry skies, soft shadows and clear water. Iris is installed along with it if needed.",
-        install: "Install and activate",
-        failed: "Could not install Orrery Shaders",
-    },
     orreryMenu: {
         description:
             "Orrery's own main menu: a space panorama, buttons and backgrounds in the Orrery look. Works without mods too.",

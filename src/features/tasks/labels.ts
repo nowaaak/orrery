@@ -15,7 +15,6 @@ const CONTENT_TASKS: TaskKind[] = [
     "install_mod",
     "update_mods",
     "install_pack",
-    "install_orrery_shaders",
     "install_orrery_menu",
 ];
 const MODPACK_TASKS: TaskKind[] = ["install_modpack", "import_modpack", "import_instance"];

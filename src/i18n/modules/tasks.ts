@@ -11,7 +11,6 @@ export const de = {
         update_mods: (subject: string) => `${subject} Updates installieren`,
         install_pack: (subject: string) =>
             `${content.de.packs.items[subject]?.name ?? subject} installieren`,
-        install_orrery_shaders: () => "Orrery Shaders installieren",
         install_orrery_menu: () => "Orrery Menu installieren",
         install_modpack: (subject: string) => `${subject} installieren`,
         import_modpack: (subject: string) => `${subject} importieren`,
@@ -51,7 +50,6 @@ export const en: typeof de = {
         install_mod: (subject) => `Install ${subject}`,
         update_mods: (subject) => `Install ${subject} updates`,
         install_pack: (subject) => `Install ${content.en.packs.items[subject]?.name ?? subject}`,
-        install_orrery_shaders: () => "Install Orrery Shaders",
         install_orrery_menu: () => "Install Orrery Menu",
         install_modpack: (subject) => `Install ${subject}`,
         import_modpack: (subject) => `Import ${subject}`,

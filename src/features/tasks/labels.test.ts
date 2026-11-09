@@ -22,7 +22,6 @@ describe("task labels", () => {
         expect(isContentTask("install_mod")).toBe(true);
         expect(isContentTask("update_mods")).toBe(true);
         expect(isContentTask("install_pack")).toBe(true);
-        expect(isContentTask("install_orrery_shaders")).toBe(true);
         expect(isContentTask("install_orrery_menu")).toBe(true);
         expect(isContentTask("launch_instance")).toBe(false);
         expect(isModpackTask("import_modpack")).toBe(true);

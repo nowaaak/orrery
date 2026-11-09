@@ -179,7 +179,6 @@ pub fn run() {
             commands::mods::remove_content_pack,
             commands::mods::scan_optifine_packs,
             commands::mods::install_local_file,
-            commands::mods::install_orrery_shaders,
             commands::mods::install_orrery_menu,
             commands::modpacks::search_modpacks,
             commands::modpacks::is_modpack,

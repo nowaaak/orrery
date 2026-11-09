@@ -24,7 +24,6 @@ pub enum TaskKind {
     InstallMod,
     UpdateMods,
     InstallPack,
-    InstallOrreryShaders,
     InstallOrreryMenu,
     InstallModpack,
     ImportModpack,

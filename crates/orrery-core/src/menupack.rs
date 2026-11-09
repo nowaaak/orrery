@@ -12,7 +12,6 @@ use crate::instances::Instance;
 use crate::instances::mods::{ContentKind, InstalledMod, ModsDir};
 use crate::progress::Stage;
 use crate::services::Services;
-use crate::shaderpack::{Activation, BundledPack};
 use crate::storage;
 use crate::tasks::{TaskId, TaskKind, TaskSpec};
 use crate::tuning::{self, VersionTier};
@@ -28,6 +27,17 @@ const RESOURCE_PACKS_KEY: &str = "resourcePacks:";
 const FALLBACK_FORMAT: u32 = 15;
 const MAX_META_BYTES: u64 = 4096;
 const FILES: &[(&str, &[u8])] = include!(concat!(env!("OUT_DIR"), "/menupack_files.rs"));
+
+pub struct BundledPack {
+    pub bytes: Vec<u8>,
+    pub sha512: String,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum Activation {
+    Select,
+    KeepSelection,
+}
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum PackFormat {

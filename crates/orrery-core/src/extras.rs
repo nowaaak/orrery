@@ -7,19 +7,18 @@ use crate::curseforge::install::{CfTarget, Clients};
 use crate::curseforge::models::parse_project_key;
 use crate::curseforge::{self, updates as curseforge_updates};
 use crate::error::IoResultExt;
-use crate::game_options;
 use crate::instances::LoaderSpec;
 use crate::instances::mods::{ContentKind, InstalledMod, ModsDir};
-use crate::menupack::{self, BUNDLED_MENU_ID};
+use crate::menupack::{self, Activation, BUNDLED_MENU_ID};
 use crate::modrinth::install::{ModTarget, install};
 use crate::modrinth::service::content_loaders;
 use crate::services::Services;
-use crate::shaderpack::{self, Activation, BUNDLED_SHADER_ID};
 use crate::tasks::{TaskId, TaskKind, TaskSpec};
 use crate::tuning::{self, SettingsRecommendation, Workload};
 use crate::{CoreError, CoreResult};
 
 const SHADER_MODS: [&str; 2] = ["iris", "oculus"];
+const RETIRED_SHADER_ID: &str = "orrery-shaders";
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize, TS)]
 #[serde(rename_all = "snake_case")]
@@ -170,15 +169,14 @@ impl Services {
             tracing::warn!(instance = %instance.id, error = %err, "failed to look up content compatibility");
         }
         let mods = self.instance_mods(&instance.id)?.load().await?.mods;
-        let mut updates: Vec<ModUpdate> = shaderpack::bundled_update(&mods)?.into_iter().collect();
-        updates.extend(menupack::bundled_update(&mods));
+        let mut updates: Vec<ModUpdate> = menupack::bundled_update(&mods).into_iter().collect();
         for kind in ContentKind::ALL {
             let items: Vec<&InstalledMod> = mods
                 .iter()
                 .filter(|m| {
                     m.kind == kind
                         && !m.pinned
-                        && m.project_id != BUNDLED_SHADER_ID
+                        && m.project_id != RETIRED_SHADER_ID
                         && m.project_id != BUNDLED_MENU_ID
                 })
                 .collect();
@@ -251,15 +249,6 @@ impl Services {
                 let installed = mods_dir.load().await?.mods;
                 for update in &updates {
                     progress.check_cancelled()?;
-                    if update.project_id == BUNDLED_SHADER_ID {
-                        shaderpack::install_bundled(
-                            &mods_dir,
-                            Activation::KeepSelection,
-                            game_options::detect_hardware_tier(),
-                        )
-                        .await?;
-                        continue;
-                    }
                     if update.project_id == BUNDLED_MENU_ID {
                         menupack::install_bundled(
                             &mods_dir,

@@ -64,9 +64,6 @@ export const removeContentPack = (instanceId: string, packId: string) =>
 export const scanOptifinePacks = (instanceId: string) =>
     call<OptifineReport[]>("scan_optifine_packs", { instanceId });
 
-export const installOrreryShaders = (instanceId: string) =>
-    call<number>("install_orrery_shaders", { instanceId });
-
 export const installOrreryMenu = (instanceId: string) =>
     call<number>("install_orrery_menu", { instanceId });
 
