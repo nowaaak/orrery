@@ -33,7 +33,7 @@ export function AccountsPage() {
     const accounts = useAccounts();
 
     return (
-        <div className="flex max-w-3xl flex-col gap-6">
+        <div className="flex flex-col gap-6">
             <PageHeader title={t.accounts.title} />
             <Card>
                 <CardHeader>

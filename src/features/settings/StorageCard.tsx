@@ -65,7 +65,7 @@ export function StorageCard() {
     const details = data ? cleanupDetails(data.cleanup) : [];
 
     return (
-        <Card className="max-w-3xl">
+        <Card>
             <CardHeader>
                 <CardTitle>{t.settings.storage.title}</CardTitle>
                 <CardDescription>

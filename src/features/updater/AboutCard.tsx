@@ -59,7 +59,7 @@ export function AboutCard() {
     };
 
     return (
-        <Card className="max-w-3xl">
+        <Card>
             <CardHeader>
                 <CardTitle>{t.updater.about.title}</CardTitle>
                 <CardDescription>{t.updater.about.description}</CardDescription>

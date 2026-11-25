@@ -92,7 +92,7 @@ export function TrashCard() {
     };
 
     return (
-        <Card className="max-w-3xl">
+        <Card>
             <CardHeader>
                 <CardTitle>{text.title}</CardTitle>
                 <CardDescription>{text.description(days)}</CardDescription>

@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Settings, accounts, instance settings and sync packs use the full width of the window instead of leaving an empty strip on the right
+
 ## 0.5.2
 
 - Orrery Shaders are removed. Instances that already have the pack keep it as an ordinary shader pack, and Orrery no longer updates it

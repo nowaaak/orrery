@@ -82,13 +82,13 @@ export function SyncPacksPage() {
             />
             <p className="max-w-3xl text-sm text-pretty text-muted-foreground">{text.intro}</p>
             {packs.isPending ? (
-                <Skeleton className="h-48 w-full max-w-3xl" />
+                <Skeleton className="h-48 w-full" />
             ) : packs.error ? (
                 <p className="text-sm text-destructive select-text">
                     {text.loadFailed}: {errorMessage(packs.error)}
                 </p>
             ) : packs.data.length === 0 ? (
-                <p className="max-w-3xl rounded-xl border border-dashed p-6 text-center text-sm text-muted-foreground">
+                <p className="rounded-xl border border-dashed p-6 text-center text-sm text-muted-foreground">
                     {text.empty}
                 </p>
             ) : (
@@ -189,7 +189,7 @@ function PackCard({ pack }: { pack: SyncPack }) {
     });
 
     return (
-        <Card className="max-w-3xl">
+        <Card>
             <CardHeader className="flex flex-row items-start justify-between gap-4">
                 <div className="flex flex-col gap-1.5">
                     <CardTitle>{pack.name}</CardTitle>

@@ -49,7 +49,7 @@ export function SettingsPage() {
             ) : settings.error ? (
                 <p className="text-destructive select-text">{errorMessage(settings.error)}</p>
             ) : (
-                <Skeleton className="h-80 w-full max-w-3xl" />
+                <Skeleton className="h-80 w-full" />
             )}
             <StorageCard />
             <TrashCard />
@@ -97,7 +97,7 @@ function SettingsForm({ initial }: { initial: Settings }) {
     };
 
     return (
-        <Card className="max-w-3xl">
+        <Card>
             <CardHeader>
                 <CardTitle>{t.settings.general}</CardTitle>
                 <CardDescription>{t.settings.generalDescription}</CardDescription>
@@ -157,7 +157,7 @@ function SettingsForm({ initial }: { initial: Settings }) {
                         </div>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid max-w-xl grid-cols-2 gap-4">
                         <MemorySelect
                             id="min-memory"
                             label={t.settings.minMemory}
@@ -325,7 +325,7 @@ function NumberField({ id, label, value, min, max, step, onChange }: NumberField
                 id={id}
                 type="number"
                 inputMode="numeric"
-                className="tabular-nums"
+                className="w-48 tabular-nums"
                 value={Number.isNaN(value) ? "" : value}
                 min={min}
                 max={max}

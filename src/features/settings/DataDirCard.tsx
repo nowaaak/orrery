@@ -115,7 +115,7 @@ export function DataDirCard() {
     };
 
     return (
-        <Card className="max-w-3xl">
+        <Card>
             <CardHeader>
                 <CardTitle>{t.settings.paths.title}</CardTitle>
                 <CardDescription>{t.settings.paths.description}</CardDescription>

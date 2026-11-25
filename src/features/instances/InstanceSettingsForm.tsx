@@ -107,7 +107,7 @@ export function InstanceSettingsForm({ instance }: { instance: Instance }) {
     };
 
     return (
-        <form onSubmit={onSubmit} className="flex max-w-3xl flex-col gap-6">
+        <form onSubmit={onSubmit} className="flex flex-col gap-6">
             <Card>
                 <CardHeader>
                     <CardTitle>{t.instances.settings.general}</CardTitle>
@@ -169,7 +169,7 @@ export function InstanceSettingsForm({ instance }: { instance: Instance }) {
                         onChange={(checked) => set("customMemory", checked)}
                     />
                     {draft.customMemory && (
-                        <div className="grid grid-cols-2 gap-4">
+                        <div className="grid max-w-xl grid-cols-2 gap-4">
                             <MemorySelect
                                 id="instance-min-memory"
                                 label={t.instances.settings.minimum}
@@ -220,7 +220,7 @@ export function InstanceSettingsForm({ instance }: { instance: Instance }) {
                         onChange={(checked) => set("customResolution", checked)}
                     />
                     {draft.customResolution && (
-                        <div className="grid grid-cols-2 gap-4">
+                        <div className="grid max-w-xl grid-cols-2 gap-4">
                             <NumberInput
                                 id="width"
                                 label={t.instances.settings.width}
