@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.5.3
 
 - Settings, accounts, instance settings and sync packs use the full width of the window instead of leaving an empty strip on the right
 
